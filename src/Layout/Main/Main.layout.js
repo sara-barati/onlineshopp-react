@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import Headercomonent from "./components/Header/Header.comonent";
+import Footercomponent from "./components/Footer/Footer.component";
 
-export default function Mainlayout({children}) {
+export default function Mainlayout({ children }) {
   return (
     <div>
-{children}
+      <Headercomonent />
+      {children}
+      <Footercomponent />
     </div>
-  )
+  );
 }

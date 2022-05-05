@@ -2,9 +2,9 @@ import React from 'react'
 import {Route, Routes} from "react-router-dom";
 import PrivateRote from './components/PrivateRoute/PrivateRoute';
 import PublicRoute from './components/PublicRoute/PublicRoute';
-import Entities from 'Page/Doshboard/components/Entities/Entities';
-import Orders from 'Page/Doshboard/components/Orders/Orders';
-import Kalaha from 'Page/Doshboard/components/kalaha/Kalaha';
+import Entities from 'Page/Entities/Entities';
+import Orders from 'Page/Orders/Orders';
+import Kalaha from 'Page/kalaha/Kalaha';
 import Dashboardpage from 'Page/Doshboard/Dashboard.page';
 import Homepage from 'Page/Home/Home.page';
 import Buypage from 'Page/Buy/Buy.page';
