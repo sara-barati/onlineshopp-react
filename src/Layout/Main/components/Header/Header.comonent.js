@@ -11,6 +11,8 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import logo from "assets/image/logo.png";
 import styles from "./Header.scss";
 
+
+
 export default function Header() {
   return (
     <Box sx={{ flexGrow: 1 }}>
