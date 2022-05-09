@@ -26,8 +26,9 @@ export default function Approutes() {
        <Route path="/dashboard" element={<PrivateRote MyComponent={Dashboardpage}/>}>
         <Route path="entities" element={<PrivateRote MyComponent={Entities}/>}/>
         <Route path="order" element={<PrivateRote MyComponent={Orders}/>}/>
-        <Route path="kalaha" element={<PrivateRote MyComponent={Kalaha}/>}/>
+        {/* <Route path="kalaha" element={<PrivateRote MyComponent={Kalaha}/>}/> */}
        </Route>
+       <Route path="/kalaha" element={<Kalaha/>}/>
        <Route path="/" element={<PublicRoute MyComponent={Homepage}/>}/>
        <Route path="/Category" element={<PublicRoute MyComponent={Categorypage}/>}/>
        <Route path="/Product" element={<PublicRoute MyComponent={Productpage}/>}/>
