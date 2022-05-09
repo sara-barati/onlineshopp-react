@@ -11,15 +11,16 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import logo from "assets/image/logo.png";
 import styles from "./Header.scss";
 
-
+import { useSelector } from "react-redux";
 
 export default function Header() {
+  const islogin=useSelector(state=>state.user)
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
           <Box sx={{ flexGrow: 1 }}>
-          <Link to={"/login"} >
+          <Link to={"/dashboard"} >
             <Button sx={{ color: 'white'}}  color="inherit" className="style.button" >مدیریت</Button>
             </Link>
             <IconButton
