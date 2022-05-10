@@ -9,18 +9,18 @@ import IconButton from "@mui/material/IconButton";
 // import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import logo from "assets/image/logo.png";
-import styles from "./Header.scss";
+import "./Header.scss"
 
 import { useSelector } from "react-redux";
 
 export default function Header() {
-  const islogin=useSelector(state=>state.user)
+  // const islogin=useSelector(state=>state.user)
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 ,  backgroundColor: 'primary.dark',width:"100vw"}} className="add-header">
       <AppBar position="static">
         <Toolbar>
           <Box sx={{ flexGrow: 1 }}>
-          <Link to={"/dashboard"} >
+          <Link to={"/login"} >
             <Button sx={{ color: 'white'}}  color="inherit" className="style.button" >مدیریت</Button>
             </Link>
             <IconButton
@@ -56,10 +56,10 @@ export default function Header() {
                 فروشگاه نوا
               </Typography>
             </Link>
-            <figure className={styles.logo_wrapper}>
+            <figure >
               <Link to="">
                 <img
-                  className={styles.logo}
+                
                   style={{ with: "80px", height: "50px" }}
                   src={logo}
                   alt=""

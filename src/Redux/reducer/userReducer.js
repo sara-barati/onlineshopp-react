@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { bool } from "yup";
+
 const userSlice=createSlice({
     name:"user",
-    initialState:false,
+    initialState:"",
     reducers:{
-        addUser:(state,action)=>{
-         return action.payload
-        }
+        // addUser:(state,action)=>{
+        //  return action.payload
+        // }
         
     }
 

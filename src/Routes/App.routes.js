@@ -23,12 +23,12 @@ export default function Approutes() {
   return (
     <Routes>
        <Route path="/login" element={<Loginpage/>}/>
-       <Route path="/dashboard" element={<PrivateRote MyComponent={Dashboardpage}/>}>
-        <Route path="entities" element={<PrivateRote MyComponent={Entities}/>}/>
-        <Route path="order" element={<PrivateRote MyComponent={Orders}/>}/>
-        {/* <Route path="kalaha" element={<PrivateRote MyComponent={Kalaha}/>}/> */}
+       <Route path="/dashboard" element={<PrivateRote flag={true} MyComponent={Dashboardpage}/>}>
+        <Route path="entities" element={<PrivateRote flag={false} MyComponent={Entities}/>}/>
+        <Route path="order" element={<PrivateRote flag={false} MyComponent={Orders}/>}/>
+        <Route path="kalaha" element={<PrivateRote flag={false} MyComponent={Kalaha}/>}/>
        </Route>
-       <Route path="/kalaha" element={<Kalaha/>}/>
+      
        <Route path="/" element={<PublicRoute MyComponent={Homepage}/>}/>
        <Route path="/Category" element={<PublicRoute MyComponent={Categorypage}/>}/>
        <Route path="/Product" element={<PublicRoute MyComponent={Productpage}/>}/>

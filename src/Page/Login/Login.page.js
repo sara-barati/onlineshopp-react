@@ -125,6 +125,13 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
+import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
+import Avatar from '@mui/material/Avatar';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { Typography , TextField} from '@mui/material';
+import { values } from 'lodash';
+
 
 export default function SignIn() {
   const[login,setlogin]=useState(false)
@@ -150,20 +157,31 @@ export default function SignIn() {
   //     await ...
   //     setSubmitting(false)
   // }}
-    onSubmit: async values =>{
-      await axios.post('http://localhost:3002/auth/login', values).then(response =>
-          console.log(response)
-   
-          //    { 
-          //       navigate("/dashboard",{ replace: true });  
-          // }
-      )
-      .catch(function (error) {
-        console.log("error");
-      })
+    // onSubmit: async values =>{
+    //   await axios.post('http://localhost:3002/auth/login', values).then(res => 
+    //   // navigate("/dashboard"),
+    //    console.log(res)
+    //   )
+      
+    //   .catch(function (error) {
+    //     console.log("error");
+    //   })
 
      
-    },
+    // },
+
+    onSubmit:async(values)=>{ await axios.post('http://localhost:3002/auth/login', values).then(
+      res=>{
+        const{data,status}=res
+        if(status===200){
+          localStorage.setItem("token",data.token)
+          localStorage.setItem("is-login",true)
+          navigate("/dashboard")
+        }
+      }
+    )
+
+    }
 
 
 
@@ -179,9 +197,28 @@ export default function SignIn() {
     //            alignItems: 'center',
     //           }}
     //         >
+    <Container   component="main" >
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}>
+             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            ورود
+          </Typography>
+          
     <form onSubmit={formik.handleSubmit}>
+      <div className='pass'>
+
       <label htmlFor="password">پسورد</label>
       <input
+      placeholder='پسورد'
         id="password"
         type="password"
         {...formik.getFieldProps('password')}
@@ -189,16 +226,26 @@ export default function SignIn() {
       {formik.touched.password && formik.errors.password ? (
         <div>{formik.errors.password}</div>
       ) : null}
+      </div>
+      
+
+
+
+
+<div className='username'>
 
       <label htmlFor="lastName">نام کاربری</label>
       <input id="username" type="text" {...formik.getFieldProps('username')} />
       {formik.touched.username && formik.errors.username ? (
         <div>{formik.errors.username}</div>
       ) : null}
+</div>
 
 
 
       <button type="submit">ورود</button>
     </form>
+    </Box>
+    </Container>
   );
 };

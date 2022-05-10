@@ -1,15 +1,15 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { useLocation, Navigate } from "react-router-dom";
-export default function Dashboardpage() {
-  const location = useLocation();
+import React from 'react';
+import {Outlet} from "react-router-dom";
 
-  const islogin=useSelector(state=>state.user)
-  if(islogin===false){
-    return <Navigate to={"/login"}  state={location.pathname}/>;
 
-  }
-  return (
-    <div>dashboard</div>
-  )
+ export default function DashboardPage(props) {
+    return (
+        <>
+            
+              
+          
+            <Outlet/>
+        </>
+    );
 }
+
