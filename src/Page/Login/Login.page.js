@@ -176,7 +176,8 @@ export default function SignIn() {
         if(status===200){
           localStorage.setItem("token",data.token)
           localStorage.setItem("is-login",true)
-          navigate("/dashboard")
+          navigate("/dashboard/order",  { replace: true })
+         
         }
       }
     )

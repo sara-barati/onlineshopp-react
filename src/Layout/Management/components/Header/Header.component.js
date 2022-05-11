@@ -15,7 +15,7 @@ import Tab from '@mui/material/Tab';
         setValue(newValue);
     };
 
-    console.log(document.location.pathname)
+    // console.log(document.location.pathname)
 
     function LinkTab(props) {
         return (
