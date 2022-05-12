@@ -1,0 +1,12 @@
+form{
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ .cont{
+width: 80%;height: 90%;
+ }
+ .pass .user{
+     display: flex;
+     width: 500px;height: 500px;
+ }
+}

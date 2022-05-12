@@ -1,5 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit'
+// import { configureStore } from '@reduxjs/toolkit'
+// //  import loginSlice from './LoginSlice'
+// import orderSlice from './orderSlice'
 
-export default configureStore({
-  reducer: {}
-})
+
+//  export const store= configureStore({
+//   reducer: {
+//     // isLogin: loginSlice,
+//     order:orderSlice,
+//   },
+// })

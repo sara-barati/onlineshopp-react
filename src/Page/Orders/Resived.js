@@ -1,31 +1,27 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux';
-
-import { setOrder } from 'Redux/reducer/orderSlice';
 import { useSelector } from 'react-redux'
-import axios from 'axios'
-
-export default function WaitingOrder() {
+import axios from 'axios';
+export default function Resived() {
     const[Order,setOrder]=useState([])
+    //   const order = useSelector((state) => state.order)
+    //   const dispatch = useDispatch()
+      const url = 'http://localhost:3002/orders';
+    
+      function getData() {
+        axios({
+          url: url,
+          method: 'get',
+      
+        })
+          .then(function (response) {
+          setOrder(response)
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+      useEffect(() =>  { getData() }, [])
 //   const order = useSelector((state) => state.order)
-//   const dispatch = useDispatch()
-  const url = 'http://localhost:3002/orders';
-
-  function getData() {
-    axios({
-      url: url,
-      method: 'get',
-  
-    })
-      .then(function (response) {
-      setOrder(response)
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-  useEffect(() =>  { getData() }, [])
-
   return (
     <>
         <div>
@@ -37,8 +33,8 @@ export default function WaitingOrder() {
             <th>زمان ثبت سفارش</th>
             <th>وضعیت</th>
           </tr>
-          {Order == null ? "loading" : Order?.map((item, id) => {
-            if (item.orderStatus === 1) {
+          {Order== null ? "kk" : Order?.map((item, id) => {
+            if (item.orderStatus == 2) {
               return (
                 <>
                   <tr>

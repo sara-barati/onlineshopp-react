@@ -1,7 +1,15 @@
-import React from 'react'
+import React from 'react';
+import {Outlet} from "react-router-dom";
 
-export default function Dashboardpage() {
-  return (
-    <div></div>
-  )
+
+ export default function DashboardPage(props) {
+    return (
+        <>
+            
+              
+          
+            <Outlet/>
+        </>
+    );
 }
+

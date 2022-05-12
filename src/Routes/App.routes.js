@@ -2,6 +2,7 @@ import React from 'react'
 import {Route, Routes} from "react-router-dom";
 import PrivateRote from './components/PrivateRoute/PrivateRoute';
 import PublicRoute from './components/PublicRoute/PublicRoute';
+import ProtectRoute from './components/ProtectRoute/ProtectRoute';
 import Entities from 'Page/Entities/Entities';
 import Orders from 'Page/Orders/Orders';
 import Kalaha from 'Page/kalaha/Kalaha';
@@ -14,6 +15,7 @@ import NotFoundpage from 'Page/NotFound/NotFound.page';
 import Productpage from 'Page/Product/Product.page';
 import Resultpage from 'Page/Result/Result.page';
 import ShoppingBasketpage from 'Page/ShoppingBasket/ShoppingBasket.page';
+import { Login } from '@mui/icons-material';
 
 
 
@@ -22,13 +24,13 @@ import ShoppingBasketpage from 'Page/ShoppingBasket/ShoppingBasket.page';
 export default function Approutes() {
   return (
     <Routes>
-       <Route path="/login" element={<Loginpage/>}/>
-       <Route path="/dashboard" element={<PrivateRote MyComponent={Dashboardpage}/>}>
-        <Route path="entities" element={<PrivateRote MyComponent={Entities}/>}/>
-        <Route path="order" element={<PrivateRote MyComponent={Orders}/>}/>
-        {/* <Route path="kalaha" element={<PrivateRote MyComponent={Kalaha}/>}/> */}
+       <Route path="/login" element={<ProtectRoute flag={false}  MyComponent={Loginpage} />}/>
+       <Route path="/dashboard" element={<PrivateRote flag={true} MyComponent={Dashboardpage}/>}>
+        <Route path="entities" element={<PrivateRote flag={false} MyComponent={Entities}/>}/>
+        <Route path="order" element={<PrivateRote flag={false} MyComponent={Orders}/>}/>
+        <Route path="kalaha" element={<PrivateRote flag={false} MyComponent={Kalaha}/>}/>
        </Route>
-       <Route path="/kalaha" element={<Kalaha/>}/>
+      
        <Route path="/" element={<PublicRoute MyComponent={Homepage}/>}/>
        <Route path="/Category" element={<PublicRoute MyComponent={Categorypage}/>}/>
        <Route path="/Product" element={<PublicRoute MyComponent={Productpage}/>}/>
