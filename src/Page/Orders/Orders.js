@@ -1,7 +1,16 @@
-import React from 'react'
-
+import React from "react";
+import { Link, Outlet } from "react-router-dom";
+// import WithAdmin from '../Layouts/WithAdmin'
+// import WaitingOrder from'./WaitingOrder'
+import Resived from './Resived'
 export default function Orders() {
   return (
-    <div>Orders</div>
-  )
+    <>
+      <span>سفارش های در حال انتظار ارسال</span>
+      <input type="radio" name="orderRadio" value="waiting" id="wait" />
+      <span>سفارش های تحویل داده شده</span>
+      <input type="radio" name="orderRadio" value="resive" id="resive"/>
+{<Resived/>}
+    </>
+  );
 }

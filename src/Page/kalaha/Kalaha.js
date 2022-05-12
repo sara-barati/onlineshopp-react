@@ -1,84 +1,102 @@
-import React, { useEffect } from 'react'
-import { table_headers } from './kalahaconfig'
-import {Table} from "Component/Table/Table.component"
-import {Box, PaginationItem, Typography,Button} from "@mui/material";
-import axios from 'axios';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react'
+// import WithAdmin from '../Layouts/WithAdmin'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
+// export default WithAdmin(Product)
+export default function kalaha() {
+  const [Product, setproduct] = useState()
+  const [Categroys, setcategorys] = useState()
+  const url = 'http://localhost:3002/products';
 
-export default function Kalaha() {
-  const [data,setdata]=useState({})
-
-   axios.get('http://localhost:3002/products').then(res=>console.log(res.data))
-  
-
-  
-  
-  // const rows=data.map(row=>{
-  //   return (
-  //     <tr key={row.id}>
-         
-  //         <td>
-  //             <figure style={{width: '40px', height: '40px'}}>
-  //                 <img style={{width: '100%', height: '100%'}}
-  //                      src={`http://localhost:3002/products/data/${row.thumbnail}`} alt=""/>
-  //             </figure>
-  //         </td>
-  //         <td>{row.name}</td>
-  //         <td></td>
-  //         <td></td>
-  //         {/* <td>{!categoriesData.loading && !subCategoriesData.loading && categoriesData.categories.find(category => +row.category === (category.id || +category.id)).name}/ {row.subcategory && subCategoriesData.subcategories.find(subcategory => row.subcategory === subcategory.id).name}</td> */}
-  //         {/* <td>
-  //             <button onClick={() => {
-  //                 handleOpenEdit(row.id)
-  //                 setProductInfo({
-  //                     name: row.name,
-  //                     price: row.price,
-  //                     quantity: row.quantity,
-  //                     category: row.category,
-  //                     image: row.image,
-  //                     description: row.description,
-  //                     thumbnail: row.thumbnail
-  //                 })
-
-
-  //             }}
-  //                     style={{
-  //                         display: 'flex',
-  //                         alignItems: 'center',
-  //                         justifyContent: 'center',
-  //                         marginBottom: '3px'
-  //                     }}>
-  //                 <EditIcon/>
-
-  //             </button>
-  //             <button onClick={() => handleDeleteStuff(row.id)}
-  //                     style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-  //                 <DeleteForeverIcon/>
-  //             </button>
-  //         </td> */}
-
-  //     </tr>
-  // )
-  // })
-
-
-// const rows = !subCategoriesData.loading && !productsData.loading && !categoriesData.loading && productsData.limitProducts.data.map(row => {
-  
-// })
+  useEffect(() => {
+    axios({
+      url: url,
+      method: 'get',
+      // params: {
+      //   token: 'TOP-SECRET'
+      // }
+    })
+      .then(function (response) {
+        setproduct(response.data)
+      })
+      .catch(function (error) {
+        console.log("error");
+      });
 
 
 
+
+  }, [])
+
+
+  useEffect(() => {
+    axios({
+      url: 'http://localhost:3002/category',
+      method: 'get',
+
+    })
+      .then(function (response) {
+        setcategorys(response.data)
+      })
+      .catch(function (error) {
+        console.log("error");
+      });
+
+
+
+
+  }, [])
 
   return (
-    <Box>
-      <Typography>مدیریت کالاها</Typography>
-<Button>افزودن کالا</Button>
+    <>
+      <button ><Link to='' />افزودن کالا</button>
+      <h2>مدیریت کالاها</h2>
+      {Product == null ? "loding" :
+        <div>
+          <table dir="rtl">
+            <tr>
+              <th>تصویر</th>
+              <th>نام کالا</th>
+              <th>دسته بندی</th>
+              <th>لینک</th>
+            </tr>
+            {Product.map((item) => {
+              if (item.category == 1) {
+                return (
+                  <tr>
+                    <td> <div style={{width: '40px', height: '40px'}}>
+                        <img style={{width: '100%', height: '100%'}}
+                             src={`http://localhost:3002/files/${item.thumbnail}`} alt=""/>
+                    </div></td>
+                    <td>{item.name}</td>
+                    {Categroys.map(categroyItem => {
+                      if (categroyItem.id == item.category) {
+                        return (
+                          <>
+                            <td style={{padding:"30px"}}>{categroyItem.name}</td>
+                            <td>
+                              <Link to=''>ویرایش </Link>
+                              <Link to=''>حذف</Link>
+                            </td>
+                          </>
 
-       <Table tableHeaders={table_headers}>
-       {/* {rows} */}
-            </Table>
-    </Box>
-    
+                        )
+                      }
 
+                    })}
+                  </tr>
+                )
+              }
+            })}
+          </table>
+
+
+        </div>
+
+      }
+
+
+    </>
   )
 }
+
