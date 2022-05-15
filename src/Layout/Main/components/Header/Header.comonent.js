@@ -20,7 +20,7 @@ export default function Header() {
       <AppBar position="static">
         <Toolbar>
           <Box sx={{ flexGrow: 1 }}>
-          <Link to={"/dashboard/kalaha"} >
+          <Link to={"/dashboard/entities"} >
             <Button sx={{ color: 'white'}}  color="inherit" className="style.button" >مدیریت</Button>
             </Link>
             <IconButton

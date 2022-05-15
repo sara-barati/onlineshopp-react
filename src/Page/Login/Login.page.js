@@ -118,135 +118,214 @@
 //     </ThemeProvider>
 //   );
 // }
-import React, {useState} from 'react';
-import axios from "axios";
-import Box from '@mui/material/Box';
+
+
+
+
+
+// import React, {useState} from 'react';
+// import axios from "axios";
+// import Box from '@mui/material/Box';
+// import { useFormik } from 'formik';
+// import * as Yup from 'yup';
+// import { useNavigate } from "react-router-dom";
+// import { useDispatch } from 'react-redux';
+// import Container from '@mui/material/Container';
+// import CssBaseline from '@mui/material/CssBaseline';
+// import Avatar from '@mui/material/Avatar';
+// import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+// import { Typography , TextField} from '@mui/material';
+// import { values } from 'lodash';
+
+
+
+  // const[login,setlogin]=useState(false)
+
+  // const navigate = useNavigate();
+  // const formik = useFormik({
+  //   initialValues: {
+  //     password: '',
+  //     username: '',
+     
+  //   },
+  //   validationSchema: Yup.object({
+  //     password: Yup.string()
+  //     .min(3, "پسورد باید بیشتر از سه کاراکتر باشد")
+  //     .required("پسورد نمیتواند خالی باشد"),
+
+  //     username: Yup.string()
+  //     .required("نام کاربری نمیتواند خالی باشد"),
+    
+  //   }),
+
+
+
+//     onSubmit:async(values)=>{ await axios.post('http://localhost:3002/auth/login', values).then(
+//       res=>{
+//         const{data,status}=res
+//         if(status===200){
+//           // localStorage.setItem("token",data.token)
+//           // localStorage.setItem("is-login",true)
+//           navigate("/dashboard/order",  { replace: true })
+         
+//         }
+//       }
+//     )
+
+//     }
+
+
+
+//   });
+
+
+//   return (
+
+          
+//     <form onSubmit={formik.handleSubmit}>
+//       <div className='pass'>
+
+//       <label htmlFor="password">پسورد</label>
+//       <input
+//       placeholder='پسورد'
+//         id="password"
+//         type="password"
+//         {...formik.getFieldProps('password')}
+//       />
+//       {formik.touched.password && formik.errors.password ? (
+//         <div>{formik.errors.password}</div>
+//       ) : null}
+//       </div>
+      
+
+
+
+
+// <div className='username'>
+
+//       <label htmlFor="lastName">نام کاربری</label>
+//       <input id="username" type="text" {...formik.getFieldProps('username')} />
+//       {formik.touched.username && formik.errors.username ? (
+//         <div>{formik.errors.username}</div>
+//       ) : null}
+// </div>
+
+
+
+//       <button type="submit">ورود</button>
+//     </form>
+    
+//   );
+// };
+
+// import * as React from 'react';
+// import Box from '@mui/material/Box';
+// import TextField from '@mui/material/TextField';
+// import Button from '@mui/material/Button';
+
+// export default function BasicTextFields() {
+//    const[login,setlogin]=useState(false)
+
+//   const navigate = useNavigate();
+//   const formik = useFormik({
+//     initialValues: {
+//       password: '',
+//       username: '',
+     
+//     },
+//     validationSchema: Yup.object({
+//       password: Yup.string()
+//       .min(3, "پسورد باید بیشتر از سه کاراکتر باشد")
+//       .required("پسورد نمیتواند خالی باشد"),
+
+//       username: Yup.string()
+//       .required("نام کاربری نمیتواند خالی باشد"),
+    
+//     }),
+//   return (
+//     <Box
+//      onSubmit={formik.handleSubmit}
+//       component="form"
+//       sx={{
+//        display:"flex"
+//       }}
+//       noValidate
+//       autoComplete="off"
+//     >
+//       <TextField id="username" label="نام کاربری " variant="outlined" />
+//       <TextField id="password" label="رمز ورود" variant="outlined"
+//               {...formik.getFieldProps('password')}
+//     />
+//     <Box component="span" sx={{display: 'block' }}></Box>
+//       {formik.touched.password && formik.errors.password ? (
+        
+//         <Box>{formik.errors.password}</Box>
+//         ) : null}
+         
+//        <Button type="submit">ورود</Button> 
+//    </Box>
+//   );
+// }
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from 'react-redux';
-import Container from '@mui/material/Container';
-import CssBaseline from '@mui/material/CssBaseline';
-import Avatar from '@mui/material/Avatar';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { Typography , TextField} from '@mui/material';
-import { values } from 'lodash';
+import * as yup from 'yup';
+// import Button from '@material-ui/core/Button';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
+const validationSchema = yup.object({
+  username: yup
+    .string('لطفا نام کاربری خود را وارد کنید')
+    .required('پر کردن این فیلد اجباری است'),
+  password: yup
+    .string('لطفا رمز ورود خود را وارد کنید')
+    .min(3, 'رمز ورود شما باید طولانی تر باشد')
+    .required('پر کردن این فیلد اجباری است'),
+});
 
-export default function SignIn() {
-  const[login,setlogin]=useState(false)
-  const dispatch=useDispatch();
-  const navigate = useNavigate();
+ export default function Login() {
   const formik = useFormik({
     initialValues: {
-      password: '',
       username: '',
-     
+      password: '',
     },
-    validationSchema: Yup.object({
-      password: Yup.string()
-      .min(3, "پسورد باید بیشتر از سه کاراکتر باشد")
-      .required("پسورد نمیتواند خالی باشد"),
-
-      username: Yup.string()
-      .required("نام کاربری نمیتواند خالی باشد"),
-    
-    }),
-
-  //   nSubmit={ async (values, { setSubmitting }) => {
-  //     await ...
-  //     setSubmitting(false)
-  // }}
-    // onSubmit: async values =>{
-    //   await axios.post('http://localhost:3002/auth/login', values).then(res => 
-    //   // navigate("/dashboard"),
-    //    console.log(res)
-    //   )
-      
-    //   .catch(function (error) {
-    //     console.log("error");
-    //   })
-
-     
-    // },
-
-    onSubmit:async(values)=>{ await axios.post('http://localhost:3002/auth/login', values).then(
-      res=>{
-        const{data,status}=res
-        if(status===200){
-          localStorage.setItem("token",data.token)
-          localStorage.setItem("is-login",true)
-          navigate("/dashboard/order",  { replace: true })
-         
-        }
-      }
-    )
-
-    }
-
-
-
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    },
   });
 
-
   return (
-    // <Box
-    //         sx={{
-    //           marginTop: 8,
-    //            display: 'flex',
-    //            flexDirection: 'column',
-    //            alignItems: 'center',
-    //           }}
-    //         >
-    <Container   component="main" >
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}>
-             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            ورود
-          </Typography>
-          
-    <form onSubmit={formik.handleSubmit}>
-      <div className='pass'>
-
-      <label htmlFor="password">پسورد</label>
-      <input
-      placeholder='پسورد'
-        id="password"
-        type="password"
-        {...formik.getFieldProps('password')}
-      />
-      {formik.touched.password && formik.errors.password ? (
-        <div>{formik.errors.password}</div>
-      ) : null}
-      </div>
-      
-
-
-
-
-<div className='username'>
-
-      <label htmlFor="lastName">نام کاربری</label>
-      <input id="username" type="text" {...formik.getFieldProps('username')} />
-      {formik.touched.username && formik.errors.username ? (
-        <div>{formik.errors.username}</div>
-      ) : null}
-</div>
-
-
-
-      <button type="submit">ورود</button>
-    </form>
-    </Box>
-    </Container>
+    <div  >
+      <form onSubmit={formik.handleSubmit}>
+        <TextField
+          fullWidth
+          id="username"
+          name="username"
+          label="نام کاربری"
+          value={formik.values.username}
+          onChange={formik.handleChange}
+          error={formik.touched.username && Boolean(formik.errors.email)}
+          helperText={formik.touched.username && formik.errors.username}
+        />
+        <TextField
+          fullWidth
+          id="password"
+          name="password"
+          label="روز ورود"
+          type="password"
+          value={formik.values.password}
+          onChange={formik.handleChange}
+          error={formik.touched.password && Boolean(formik.errors.password)}
+          helperText={formik.touched.password && formik.errors.password}
+        />
+        <Button color="primary" variant="contained" fullWidth type="submit">
+          ورود
+        </Button>
+      </form>
+    </div>
   );
 };

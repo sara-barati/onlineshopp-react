@@ -33,7 +33,7 @@ export default function Resived() {
             <th>زمان ثبت سفارش</th>
             <th>وضعیت</th>
           </tr>
-          {Order== null ? "kk" : Order?.map((item, id) => {
+          {Order== null ? "loading" : Order.map((item, id) => {
             if (item.orderStatus == 2) {
               return (
                 <>
