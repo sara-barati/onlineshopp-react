@@ -28,6 +28,8 @@ export default function kalaha() {
 
   }, [])
 
+  
+
 
   useEffect(() => {
     axios({
@@ -61,7 +63,7 @@ export default function kalaha() {
               <th>لینک</th>
             </tr>
             {Product.map((item) => {
-              if (item.category == 1) {
+         
                 return (
                   <tr>
                     <td> <div style={{width: '40px', height: '40px'}}>
@@ -86,7 +88,7 @@ export default function kalaha() {
                     })}
                   </tr>
                 )
-              }
+              
             })}
           </table>
 

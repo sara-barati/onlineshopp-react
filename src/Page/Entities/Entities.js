@@ -22,25 +22,28 @@ export default function Entities(){
         console.log(error);
       });
   }
-  useEffect(() => {
-    axios({
-      url: url,
-      method: 'get',
-      // params: {
-      //   token: 'TOP-SECRET'
-      // }
-    })
-      .then(function (response) {
-        setProduct(response.data)
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+
+
+  useEffect(() =>  { getData() }, [])
+  // useEffect(() => {
+  //   axios({
+  //     url: url,
+  //     method: 'get',
+  //     // params: {
+  //     //   token: 'TOP-SECRET'
+  //     // }
+  //   })
+  //     .then(function (response) {
+  //       setProduct(response.data)
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
 
 
 
 
-  }, [])
+  // }, [])
   return (
     < >
       <button ><Link to='' />ذخیره</button>
@@ -54,7 +57,7 @@ export default function Entities(){
               <th>موجودی</th>
             </tr>
             {product.map((item) => {
-              if (item.category == 1) {
+            
                 return (
                   <tr>
                     <td>{item.name}</td>
@@ -62,7 +65,7 @@ export default function Entities(){
                     <td>{item.count}</td>
                   </tr>
                 )
-              }
+              
             })}
           </table>
 

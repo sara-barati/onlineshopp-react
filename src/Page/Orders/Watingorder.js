@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 
-import { setOrder } from 'Redux/reducer/orderSlice';
-import { useSelector } from 'react-redux'
+// import { setOrder } from 'Redux/reducer/orderSlice';
+// import { useSelector } from 'react-redux'
 import axios from 'axios'
 
 export default function WaitingOrder() {
@@ -11,14 +11,22 @@ export default function WaitingOrder() {
 //   const dispatch = useDispatch()
   const url = 'http://localhost:3002/orders';
 
+//   headers: {
+//       const token = localStorage.getItem('token');
+//       config.headers.Authorization =  token ? `Bearer ${token}` : '';
+
+//       const config = {
+//           headers: { Authorization: `Bearer ${token}` }
+//       };}
   function getData() {
     axios({
       url: url,
       method: 'get',
+     
   
     })
-      .then(function (response) {
-      setOrder(response)
+      .then( (response) =>{
+        setOrder(response)
       })
       .catch(function (error) {
         console.log(error);
@@ -37,7 +45,7 @@ export default function WaitingOrder() {
             <th>زمان ثبت سفارش</th>
             <th>وضعیت</th>
           </tr>
-          {Order == null ? "loading" : Order?.map((item, id) => {
+          {Order == null ? "loading" : Order.map((item, id) => {
             if (item.orderStatus === 1) {
               return (
                 <>
