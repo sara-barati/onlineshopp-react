@@ -271,11 +271,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { useFormik } from 'formik';
+import { useFetch } from 'hook/useFetch';
 import * as yup from 'yup';
 // import Button from '@material-ui/core/Button';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setLogin } from 'Redux/reducer/login.Slice';
 const validationSchema = yup.object({
   username: yup
     .string('لطفا نام کاربری خود را وارد کنید')
@@ -287,15 +291,45 @@ const validationSchema = yup.object({
 });
 
  export default function Login() {
+  const dispatch = useDispatch()
+   const navigate=useNavigate()
+  // const { data, error } = useFetch(`http://localhost:3002/auth/login`);
   const formik = useFormik({
     initialValues: {
       username: '',
       password: '',
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
+        onSubmit:async(values)=>{ await axios.post('http://localhost:3002/auth/login', values).then(
+      res=>{
+        const{data,status}=res
+        if(status===200){
+          dispatch(setLogin(true))
+          localStorage.setItem("token",data.token)
+          localStorage.setItem("is-login",true)
+          navigate("/dashboard/order",  { replace: true })
+         
+        }
+      }
+      
+    )
+  
+
+    }
+    // onSubmit: (values) => {
+    //   if (data) {
+    //        localStorage.setItem("token",data.token)
+    //       localStorage.setItem("is-login",true)
+    //       navigate("/dashboard/order",  { replace: true })
+         
+    //   }
+    //   else{
+    //     alert(error)
+    //   }
+    //   // else{
+    //   //   alert('لطفا دوباره تلاش کنید')
+    //   // }
+    // },
   });
 
   return (
@@ -325,6 +359,8 @@ const validationSchema = yup.object({
         <Button color="primary" variant="contained" fullWidth type="submit">
           ورود
         </Button>
+     
+    
       </form>
     </div>
   );

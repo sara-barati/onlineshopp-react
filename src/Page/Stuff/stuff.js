@@ -3,9 +3,9 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 // export default WithAdmin(Product)
-export default function kalaha() {
-  const [Product, setproduct] = useState()
-  const [Categroys, setcategorys] = useState()
+export default function Stuff() {
+  const [Product, setproduct] = useState([])
+  const [Categroys, setcategorys] = useState([])
   const url = 'http://localhost:3002/products';
 
   useEffect(() => {
@@ -71,7 +71,7 @@ export default function kalaha() {
                              src={`http://localhost:3002/files/${item.thumbnail}`} alt=""/>
                     </div></td>
                     <td>{item.name}</td>
-                    {Categroys.map(categroyItem => {
+                    {Categroys?.map(categroyItem => {
                       if (categroyItem.id == item.category) {
                         return (
                           <>
@@ -102,3 +102,12 @@ export default function kalaha() {
   )
 }
 
+
+
+// import React from 'react'
+
+// export default function stuff() {
+//   return (
+//     <div>stuff</div>
+//   )
+// }
