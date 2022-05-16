@@ -1,11 +1,9 @@
 import axios from "axios";
-import Login from "Page/Login/Login.page";
-import { Navigate } from "react-router-dom";
-class API {
 
+class API {
   constructor() {
     this.http = axios.create({
-      baseURL: " http://localhost:3002/",
+      baseURL: "http://localhost:3002/",
       timeout: 5000,
       headers: {
         "Content-Type": "application/json",
@@ -24,8 +22,12 @@ class API {
   configuration() {
     this.http.interceptors.request.use(
       (config) => {
-      const token = localStorage.getItem("token")
-        return token;
+      let token= localStorage.getItem("token")
+      console.log(token);
+      if (token){
+        config.headers['token']=token;
+      }
+        return config;
       },
       (error) => {
         return Promise.reject(error);
@@ -37,9 +39,8 @@ class API {
         return response;
       },
       (error) => {
-
-        <Navigate to="/login" />
-        // return Promise.reject(error);
+console.log();
+        return Promise.reject(error);
       }
     );
   }
@@ -64,14 +65,14 @@ class API {
     return this.http.delete(url, config);
   }
 
-//   postFormData(url, formData, config) {
-//     return this.http.post(url, formData, {
-//       headers: {
-//         "Content-Type": "multipart/form-data"
-//       },
-//       ...config
-//     });
-//   }
+  postFormData(url, formData, config) {
+    return this.http.post(url, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      },
+      ...config
+    });
+  }
 }
 
 export const api = new API();

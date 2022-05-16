@@ -11,7 +11,7 @@ export default function Orders() {
       <input type="radio" name="orderRadio" value="waiting" id="wait" />
       <span>سفارش های تحویل داده شده</span>
       <input type="radio" name="orderRadio" value="resive" id="resive"/>
-{<WaitingOrder/>}
+{/* {<WaitingOrder/>} */}
     </>
   );
 }
