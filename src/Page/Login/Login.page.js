@@ -271,17 +271,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { useFormik } from 'formik';
-import { useFetch } from 'hook/useFetch';
-import './login.css'
 import * as yup from 'yup';
 // import Button from '@material-ui/core/Button';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setLogin } from 'Redux/reducer/login.Slice';
-import pic from 'assets/image/login.webp'
+
 const validationSchema = yup.object({
   username: yup
     .string('لطفا نام کاربری خود را وارد کنید')
@@ -293,68 +287,32 @@ const validationSchema = yup.object({
 });
 
  export default function Login() {
-  const dispatch = useDispatch()
-   const navigate=useNavigate()
-  // const { data, error } = useFetch(`http://localhost:3002/auth/login`);
   const formik = useFormik({
     initialValues: {
       username: '',
       password: '',
     },
     validationSchema: validationSchema,
-        onSubmit:async(values)=>{ await axios.post('http://localhost:3002/auth/login', values).then(
-      res=>{
-        const{data,status}=res
-        if(status===200){
-          dispatch(setLogin(true))
-          localStorage.setItem("token",data.token)
-          localStorage.setItem("is-login",true)
-          navigate("/dashboard/order",  { replace: true })
-         
-        }
-      }
-      
-    )
-  
-
-    }
-    // onSubmit: (values) => {
-    //   if (data) {
-    //        localStorage.setItem("token",data.token)
-    //       localStorage.setItem("is-login",true)
-    //       navigate("/dashboard/order",  { replace: true })
-         
-    //   }
-    //   else{
-    //     alert(error)
-    //   }
-    //   // else{
-    //   //   alert('لطفا دوباره تلاش کنید')
-    //   // }
-    // },
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    },
   });
 
   return (
-
-    <div className='container'  >
-    <img className="img-fluid" 
-     src={pic} 
-     alt="logo"/>
-      <form onSubmit={formik.handleSubmit}  >
+    <div  >
+      <form onSubmit={formik.handleSubmit}>
         <TextField
-         
+          fullWidth
           id="username"
           name="username"
           label="نام کاربری"
-          type={"text"}
           value={formik.values.username}
           onChange={formik.handleChange}
           error={formik.touched.username && Boolean(formik.errors.email)}
           helperText={formik.touched.username && formik.errors.username}
-        
         />
         <TextField
-          
+          fullWidth
           id="password"
           name="password"
           label="روز ورود"
@@ -364,11 +322,9 @@ const validationSchema = yup.object({
           error={formik.touched.password && Boolean(formik.errors.password)}
           helperText={formik.touched.password && formik.errors.password}
         />
-        <Button color="primary" variant="contained" type="submit">
+        <Button color="primary" variant="contained" fullWidth type="submit">
           ورود
         </Button>
-     
-    
       </form>
     </div>
   );

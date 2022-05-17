@@ -5,7 +5,7 @@ import PublicRoute from './components/PublicRoute/PublicRoute';
 import ProtectRoute from './components/ProtectRoute/ProtectRoute';
 import Entities from 'Page/Entities/Entities';
 import Orders from 'Page/Orders/Orders';
-import stuff from 'Page/Stuff/stuff';
+import Kalaha from 'Page/kalaha/Kalaha';
 import Dashboardpage from 'Page/Doshboard/Dashboard.page';
 import Homepage from 'Page/Home/Home.page';
 import Buypage from 'Page/Buy/Buy.page';
@@ -28,7 +28,7 @@ export default function Approutes() {
        <Route path="/dashboard" element={<PrivateRote flag={true} MyComponent={Dashboardpage}/>}>
         <Route path="entities" element={<PrivateRote flag={false} MyComponent={Entities}/>}/>
         <Route path="order" element={<PrivateRote flag={false} MyComponent={Orders}/>}/>
-        <Route path="stuff" element={<PrivateRote flag={false} MyComponent={stuff}/>}/>
+        <Route path="kalaha" element={<PrivateRote flag={false} MyComponent={Kalaha}/>}/>
        </Route>
       
        <Route path="/" element={<PublicRoute MyComponent={Homepage}/>}/>
