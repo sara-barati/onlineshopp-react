@@ -1,8 +1,75 @@
 
-import React from 'react'
+import React from 'react';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import NumberFormat from 'react-number-format';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import {Link} from "react-router-dom";
 
-export default function ProductCardcomponent() {
-  return (
-    <div></div>
-  )
+
+
+function ProductCard({data}) {
+
+
+    return (
+        <Link to={`${PATH.PRODUCTT}/${data.id}`}>
+            <Card sx={{
+                maxWidth: 380,
+                height: '370px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                transition: 'transform .3s linear',
+                background: 'lightgray',
+                margin: 'auto',
+                '&:hover': {transform: 'translateY(5px)'}
+            }}>
+
+                <CardMedia
+                    sx={{boxSizing: 'border-box', width: '100%', height: '190px', objectFit: 'cover'}}
+                    component="img"
+
+                    image={`http://localhost:3002/files/${data.thumbnail}`}
+                    alt="green iguana"
+
+                />
+
+                <CardContent
+                    sx={{display: 'flex', height: '100%', flexDirection: 'column', justifyContent: 'space-between'}}>
+                    <Typography gutterBottom variant="h6" sx={{color: '#2c2c2c'}} component="div">
+                        {data.name}
+                    </Typography>
+                    <Typography sx={{
+                        textAlign: 'right',
+                        display: 'flex',
+                        justifyContent: 'space-between'
+                    }}
+                                variant="body1" color="#2c2c2c">
+                    <span style={{display: 'flex', alignItems: 'center', textAlign: 'right'}}>
+                        <LocalShippingIcon sx={{marginRight: 1}}/>
+                        <span>ارسال سریع</span>
+
+                    </span>
+
+                        <span>
+                        <NumberFormat className='fa-num' value={data.price || +data.price} displayType={'text'}
+                                      thousandSeparator={true}
+                                      prefix={''}/>
+                         <span style={{marginRight: '5px'}}>
+                        تومان
+                         </span>
+                    </span>
+
+                    </Typography>
+                </CardContent>
+
+            </Card>
+        </Link>
+    );
 }
+
+export {ProductCard}
