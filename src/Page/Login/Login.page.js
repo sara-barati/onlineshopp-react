@@ -272,6 +272,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { useFormik } from 'formik';
 import { useFetch } from 'hook/useFetch';
+import './login.css'
 import * as yup from 'yup';
 // import Button from '@material-ui/core/Button';
 import TextField from '@mui/material/TextField';
@@ -280,6 +281,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setLogin } from 'Redux/reducer/login.Slice';
+import pic from 'assets/image/login.webp'
 const validationSchema = yup.object({
   username: yup
     .string('لطفا نام کاربری خود را وارد کنید')
@@ -333,20 +335,26 @@ const validationSchema = yup.object({
   });
 
   return (
-    <div  >
-      <form onSubmit={formik.handleSubmit}>
+
+    <div className='container'  >
+    <img className="img-fluid" 
+     src={pic} 
+     alt="logo"/>
+      <form onSubmit={formik.handleSubmit}  >
         <TextField
-          fullWidth
+         
           id="username"
           name="username"
           label="نام کاربری"
+          type={"text"}
           value={formik.values.username}
           onChange={formik.handleChange}
           error={formik.touched.username && Boolean(formik.errors.email)}
           helperText={formik.touched.username && formik.errors.username}
+        
         />
         <TextField
-          fullWidth
+          
           id="password"
           name="password"
           label="روز ورود"
@@ -356,7 +364,7 @@ const validationSchema = yup.object({
           error={formik.touched.password && Boolean(formik.errors.password)}
           helperText={formik.touched.password && formik.errors.password}
         />
-        <Button color="primary" variant="contained" fullWidth type="submit">
+        <Button color="primary" variant="contained" type="submit">
           ورود
         </Button>
      

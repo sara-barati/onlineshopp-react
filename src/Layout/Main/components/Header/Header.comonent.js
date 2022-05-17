@@ -6,29 +6,57 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-// import MenuIcon from "@mui/icons-material/Menu";
+import { Navigate } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import logo from "assets/image/logo.png";
-import "./Header.scss"
+import './Header.component.css'
 
 import { useSelector } from "react-redux";
 
 export default function Header() {
   // const islogin=useSelector(state=>state.user)
   return (
-    <Box sx={{ flexGrow: 1 ,  backgroundColor: 'primary.dark',width:"100vw"}} className="add-header">
-      <AppBar position="static">
+    <Box
+      sx={{ flexGrow: 1, bgcolor: "primary.main", width: "100vw" }}
+      className="add-header"
+    >
+      <AppBar position="static" sx={{ flexGrow: 1, bgcolor: "#dcedc8" }}>
         <Toolbar>
-          <Box sx={{ flexGrow: 1 }}>
-          <Link to={"/dashboard/entities"} >
-            <Button sx={{ color: 'white'}}  color="inherit" className="style.button" >مدیریت</Button>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { lm: "flex", flexDirection: "column" },
+            }}
+          >
+            <Link to={"/dashboard/entities"} style={{ textDecoration: "none" }}>
+              <Button
+                sx={{
+                  color: "white",
+                  bgcolor: "#558b2f",
+                  textDecoration: "none",
+                  width: "80px",
+                  height: "30px",
+                }}
+                color="inherit"
+                className="style.button"
+              >
+                {" "}
+                <ManageAccountsIcon sx={{ marginLeft: "8px", pt: "2px" }} />
+                مدیریت
+              </Button>
             </Link>
             <IconButton
-              size="large"
               edge="start"
               color="inherit"
               aria-label="menu"
-              sx={{ mr: 2, ml: 4 }}
+              sx={{
+                ml: 5,
+                bgcolor: "#558b2f",
+                borderRadius: "5px",
+                width: "90px",
+                height: "30px",
+              }}
             >
               <ShoppingCartIcon />
               <Typography component="div" sx={{ flexGrow: 1 }}>
@@ -46,20 +74,19 @@ export default function Header() {
               },
             }}
           >
-            <Link to="" style={{direction:"none"}}>
+            <Link to="" style={{ textDecoration: "none" }}>
               <Typography
-                variant="h6"
+                variant="h5"
                 noWrap
                 component="div"
-                sx={{ flexGrow: 1, color: "#f8f8f8", display: { md: "flex" } }}
+                sx={{ flexGrow: 1, display: { md: "flex" }, color: "#558b2f" }}
               >
                 فروشگاه نوا
               </Typography>
             </Link>
-            <figure >
+            <figure>
               <Link to="">
                 <img
-                
                   style={{ with: "80px", height: "50px" }}
                   src={logo}
                   alt=""
@@ -67,7 +94,6 @@ export default function Header() {
               </Link>
             </figure>
           </Box>
-
         </Toolbar>
       </AppBar>
     </Box>

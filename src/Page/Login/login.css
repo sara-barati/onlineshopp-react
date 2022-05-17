@@ -1,0 +1,12 @@
+form{
+    display: flex;flex-direction: column;
+}
+.img-fluid{
+    width: 50vw;
+}
+.container{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+
+}
