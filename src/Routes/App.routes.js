@@ -32,7 +32,7 @@ export default function Approutes() {
        </Route>
       
        <Route path="/" element={<PublicRoute MyComponent={Homepage}/>}/>
-       <Route path="/Category" element={<PublicRoute MyComponent={Categorypage}/>}/>
+       <Route path="/category/:productsId" element={<PublicRoute MyComponent={Categorypage}/>}/>
        <Route path="/Product" element={<PublicRoute MyComponent={Productpage}/>}/>
        <Route path="/shoppingbasket" element={<PublicRoute MyComponent={ShoppingBasketpage}/>}/>
        <Route path="Buy" element={<PublicRoute MyComponent={Buypage}/>}/>
@@ -40,7 +40,7 @@ export default function Approutes() {
        <Route path="*" element={<NotFoundpage/>}/>
        
 
-
+      
     </Routes>
   )
 }
