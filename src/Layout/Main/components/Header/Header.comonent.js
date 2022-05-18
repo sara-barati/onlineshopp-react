@@ -21,12 +21,15 @@ export default function Header() {
       sx={{ flexGrow: 1, bgcolor: "primary.main", width: "100vw" }}
       className="add-header"
     >
-      <AppBar position="static" sx={{ flexGrow: 1, bgcolor: "#dcedc8" }}>
-        <Toolbar>
+      <AppBar position="static" sx={{ flexGrow: 1, bgcolor: "#c5e1a5",width:"100vw",mr:"0",}}>
+        <Toolbar sx={{width:"100vw", mr:"0"}}>
           <Box
             sx={{
               flexGrow: 1,
               display: { lm: "flex", flexDirection: "column" },
+              // flexDirection: {
+              //   xs: 'col'
+              //   }
             }}
           >
             <Link to={"/dashboard/entities"} style={{ textDecoration: "none" }}>
@@ -74,7 +77,7 @@ export default function Header() {
               },
             }}
           >
-            <Link to="" style={{ textDecoration: "none" }}>
+            <Link to="/" style={{ textDecoration: "none" }}>
               <Typography
                 variant="h5"
                 noWrap
@@ -85,7 +88,7 @@ export default function Header() {
               </Typography>
             </Link>
             <figure>
-              <Link to="">
+              <Link to="/">
                 <img
                   style={{ with: "80px", height: "50px" }}
                   src={logo}

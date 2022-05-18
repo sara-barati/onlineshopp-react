@@ -9,7 +9,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
  import {CircularProgress,Pagination,Box,Typography} from "@mui/material";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
 
 export default function Entities(){
   const [product, setProduct] = useState([])
@@ -55,6 +56,10 @@ export default function Entities(){
   // }, [])
   return (
     < >
+         <Button  variant="contained"  sx={{bgcolor:"#388e3c" ,':hover': {
+      bgcolor: '#69f0ae'} , ml:"26%", mt:"1%", pl:"1%",pr:"1%"}}>
+          ذخیره
+        </Button>
      <Box
       sx={{
         display: "flex",
@@ -63,7 +68,7 @@ export default function Entities(){
         gap: 2,
         marginInline: 2
       }} >
-        <TableContainer component={Paper} dir="rtl" sx={{width:"45vw" , height:{},alignContent:"center", ml:"25%",mr:"outo%", textAlign:"center", mt:"5%"}}aria-label="customized table" >
+        <TableContainer component={Paper} dir="rtl" sx={{width:"45vw" , height:"53.5vh",alignContent:"center", textAlign:"center", mt:"5%"}}aria-label="customized table" >
 <Table>
 <TableHead>
     <TableRow>
@@ -84,7 +89,7 @@ export default function Entities(){
       >
 
            <TableCell align="right">{item.name}</TableCell>
-           <TableCell style={{padding:"30px"}}>{item.price}</TableCell>
+           <TableCell style={{padding:"26px"}}>{item.price}</TableCell>
           <TableCell>{item.count}</TableCell>
      </TableRow>
       </>

@@ -36,7 +36,7 @@ export default function Headercomponent() {
   return (
     <header>
       <Box sx={{ minHeight: "100px" }}>
-        <AppBar sx={{ height: "100%" }} position="static">
+        <AppBar sx={{ height: "100%", bgcolor:"#c5e1a5" }} position="static">
           <Container
             maxWidth="xl"
             sx={(theme) => {
@@ -61,7 +61,7 @@ export default function Headercomponent() {
                 variant="h4"
                 noWrap
                 component="h4"
-                sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+                sx={{ mr: 2, display: { xs: "none", md: "flex",  color: "#558b2f" } }}
               >
                 پنل مدیریت فروشگاه
               </Typography>
@@ -74,7 +74,7 @@ export default function Headercomponent() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-evenly",
-                  backgroundColor: "primary.contrastText",
+                  backgroundColor: "#dcedc8",
                   textAlign: "center",
                   height: "50px",
                   borderRadius: "8px",
@@ -88,14 +88,14 @@ export default function Headercomponent() {
                 };
               }}
             >
-              <Link onClick={() => handleActive(1)} to={"/dashboard/stuff"}>
+              <Link style={{ textDecoration: "none" }}   onClick={() => handleActive(1)} to={"/dashboard/stuff"}>
                 کالاها{" "}
               </Link>
-              <Link onClick={() => handleActive(2)} to={"/dashboard/entities"}>
+              <Link style={{ textDecoration: "none" }} onClick={() => handleActive(2)} to={"/dashboard/entities"}>
                 {" "}
                 موجودی و قیمت ها
               </Link>
-              <Link onClick={() => handleActive(3)} to={"/dashboard/order"}>
+              <Link style={{ textDecoration: "none" }} onClick={() => handleActive(3)} to={"/dashboard/order"}>
                 {" "}
                 سفارش ها
               </Link>
@@ -116,6 +116,7 @@ export default function Headercomponent() {
                     display: "flex",
                     fontSize: "1.2rem",
                     marginRight: "15px",
+                   bgcolor: "#558b2f"
                   }}
                 >
                   <ArrowForwardIcon sx={{ marginLeft: "8px" }} />
@@ -128,6 +129,7 @@ export default function Headercomponent() {
                     display: "flex",
                     fontSize: "1.2rem",
                     marginRight: "15px",
+                    bgcolor: "#558b2f"
                   }}
                   onClick={() => {
                     localStorage.clear();

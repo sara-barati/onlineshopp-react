@@ -102,7 +102,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
- import {CircularProgress,Pagination,Box,Typography} from "@mui/material";
+
+ import {CircularProgress,Pagination,Box,Typography, Button} from "@mui/material";
 
 
 // function createData(name, calories, fat, carbs, protein) {
@@ -150,6 +151,7 @@ export default function Stuff() {
     })
       .then(function (response) {
         setproduct(response.data);
+      
       })
       .catch(function (error) {
         console.log("error");
@@ -159,7 +161,7 @@ export default function Stuff() {
   useEffect(() => {
    getData(page)
   }, [page]);
-
+  console.log(Product);
   useEffect(() => {
     axios({
       url: "http://localhost:3002/category",
@@ -167,11 +169,13 @@ export default function Stuff() {
     })
       .then(function (response) {
         setcategorys(response.data);
+        
       })
       .catch(function (error) {
         console.log("error");
       });
   }, []);
+  console.log(Product);
   // if (error) {
   //   return (
   //     <>
@@ -183,8 +187,13 @@ export default function Stuff() {
 
   return (
     <>
+             <Button  variant="contained"  sx={{bgcolor:"#388e3c" ,':hover': {
+      bgcolor: '#69f0ae'} , ml:"26%", mt:"1%", pl:"1.5%",pr:"1.5%"}}>
+          افزودن کالا
+        </Button>
     <Box
       sx={{
+        
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -192,7 +201,7 @@ export default function Stuff() {
         marginInline: 2
       }}
     >
-    <TableContainer component={Paper} dir="rtl" sx={{width:"45vw" , height:{},alignContent:"center", ml:"25%",mr:"outo%", textAlign:"center", mt:"5%"}}aria-label="customized table" >
+    <TableContainer component={Paper} dir="rtl" sx={{width:"45vw" , height:"54vh",alignContent:"center", textAlign:"center", mt:"5%"}}aria-label="customized table" >
       <Table>
         <TableHead>
           <TableRow>

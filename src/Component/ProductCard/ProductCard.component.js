@@ -16,21 +16,22 @@ function ProductCard({data}) {
 
 
     return (
-        <Link to={`${PATH.PRODUCTT}/${data.id}`}>
+        // <Link to={`${PATH.PRODUCTT}/${data.id}`}>
             <Card sx={{
-                maxWidth: 380,
-                height: '370px',
+                maxWidth: 330,
+                height: '380px',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 transition: 'transform .3s linear',
-                background: 'lightgray',
+                background: 'white',
+                boxShadow:" 0.5px 1px #888888",
                 margin: 'auto',
-                '&:hover': {transform: 'translateY(5px)'}
+                '&:hover': {transform: 'translateY(7px)'}
             }}>
 
                 <CardMedia
-                    sx={{boxSizing: 'border-box', width: '100%', height: '190px', objectFit: 'cover'}}
+                    sx={{boxSizing: 'border-box', width: '100%', height:'55%', objectFit: 'contain ', color:"white", alignContent:"center"}}
                     component="img"
 
                     image={`http://localhost:3002/files/${data.thumbnail}`}
@@ -39,7 +40,7 @@ function ProductCard({data}) {
                 />
 
                 <CardContent
-                    sx={{display: 'flex', height: '100%', flexDirection: 'column', justifyContent: 'space-between'}}>
+                    sx={{display: 'flex', height: '100%', flexDirection: 'column', justifyContent: 'space-between', bgcolor:"#dcedc8"}}>
                     <Typography gutterBottom variant="h6" sx={{color: '#2c2c2c'}} component="div">
                         {data.name}
                     </Typography>
@@ -68,7 +69,7 @@ function ProductCard({data}) {
                 </CardContent>
 
             </Card>
-        </Link>
+        // </Link>
     );
 }
 
