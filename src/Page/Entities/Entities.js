@@ -14,9 +14,9 @@ import Button from '@mui/material/Button';
 
 export default function Entities(){
   const [product, setProduct] = useState([])
-  const limit = useMemo(() => 5, []);
+  const limit = useMemo(() => 4, []);
   const [page, setPage] = useState(1);
-  const url = `http://localhost:3002/products?_page=${page}&_limit=5`;
+  const url = `http://localhost:3002/products?_page=${page}&_limit=4`;
   function getData() {
     axios({
       url: url,
@@ -68,7 +68,7 @@ export default function Entities(){
         gap: 2,
         marginInline: 2
       }} >
-        <TableContainer component={Paper} dir="rtl" sx={{width:"45vw" , height:"53.5vh",alignContent:"center", textAlign:"center", mt:"5%"}}aria-label="customized table" >
+        <TableContainer component={Paper} dir="rtl" sx={{width:"45vw" , height:"100%",alignContent:"center", textAlign:"center", mt:"3%"}}aria-label="customized table" >
 <Table>
 <TableHead>
     <TableRow>
@@ -104,9 +104,10 @@ export default function Entities(){
 variant="outlined"
 defaultPage={1}
 page={page}
-count={Math.ceil(24/ limit)}
+count={Math.ceil(32/ limit)}
 // Math.ceil(total data / limit)
 // 6 / 4 = 1
+sx={{mb:"3%"}}
 onChange={(_, page) => setPage(page)}
 />
 </Box>

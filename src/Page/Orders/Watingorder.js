@@ -8,6 +8,7 @@ export default function WaitingOrder() {
     const { data, loading, error } = useFetch(
       `/orders`
     );
+   
     console.log(data);
 
 

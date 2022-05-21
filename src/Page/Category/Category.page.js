@@ -51,17 +51,78 @@ export default function Categorypage() {
     
     console.log(product);
     
+   console.log(productsId);
    
+  //  const getSelec =() => {
+  //   const select = product.filter(
+  //     (item) => item.category === productsId);
+  //   setData(select)
+  // };
 
+ 
+  const sections= product.map(items=>{
+  if(items.category===productsId){
+    return(
+ 
+      <Grid sx={{mb: 1}} key={items.id} justifyContent="center" item xs={12} sm={6} lg={4}>
+      <ProductCard 
+                 data={items}/>
+  </Grid>
+ 
+  
+    )}})
+
+
+  
 
 
 return(<>
- <Section limitness={true} id={productsId} key={productsId} title={productsId}
-                 data={product.filter(productt => +productt.category === productsId)}/>
-
- 
+  <Grid container spacing={3} sx={{textAlign:{xs: "center"}}}>
+  {sections}
+   </Grid>
+  
   </>
-)}
+)
+}
+
+
+// const sections = category.map(categoryy => {
+//   return (
+//       <Section limitness={false} id={categoryy.id} key={categoryy.id} title={categoryy.name}
+//                data={product.filter(productt => +productt.category === categoryy.id)}/>
+//   )
+// })
+
+
+// return(<>
+// {sections}
+// </>
+// )}
+
+    // if(+product.category===productsId){
+    //   product.map(item=>{
+    //     return (
+    //     <>
+    //     <Grid sx={{mb: 1}} key={item.id} justifyContent="center" item xs={12} sm={6} lg={4}>
+    //     <ProductCard data={item}/>
+    // </Grid>
+    // </>)
+    //   }
+    // )
+
+    // }}
+    // return (
+    //         <Grid sx={{mb: 1}} key={product.id} justifyContent="center" item xs={12} sm={6} lg={4}>
+    //         <ProductCard data={product}/>
+    //     </Grid>
+      // <Section limitness={false} id={productsId} key={productsId} title={"k"}
+      //            data={product.filter(productt => +productt.category === productsId)}/>
+    //     <Grid sx={{mb: 1}} key={product.id} justifyContent="center" item xs={12} sm={6} lg={4}>
+    //         <ProductCard data={product}/>
+    //     </Grid>
+    // )
+    
+
 
   // useEffect(() => {
   //   axios({

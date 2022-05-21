@@ -16,7 +16,7 @@ function ProductCard({data}) {
 
 
     return (
-        // <Link to={`${PATH.PRODUCTT}/${data.id}`}>
+        <Link to={`/product/${data.id}`} style={{textDecoration:"none"}}>
             <Card sx={{
                 maxWidth: 330,
                 height: '380px',
@@ -69,7 +69,7 @@ function ProductCard({data}) {
                 </CardContent>
 
             </Card>
-        // </Link>
+         </Link>
     );
 }
 
