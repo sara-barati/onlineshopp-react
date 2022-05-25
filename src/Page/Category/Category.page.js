@@ -21,14 +21,24 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 
 export default function Categorypage() {
+  const drawerWidth = 240;
   const {productsId} = useParams()
-  // const [searchParams, setSearchParams] = useSearchParams();
-
   const [product, setProduct] = useState([]);
   const[category,setCategory]=useState([]);
   const[data,setData]=useState([])
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState(null);
+
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const handleDrawerToggle = () => {
+      setMobileOpen(!mobileOpen);
+  };
+
+    // console.log(categoriesData.categories)
+
+    
+
+ 
+
   const url = `http://localhost:3002/products`;
   const getData=()=>{
     axios({
@@ -49,10 +59,99 @@ export default function Categorypage() {
       getData()
     }, []);
     
+
+   const url2 = `http://localhost:3002/category`;
+  const getData2=()=>{
+    axios({
+      url: url2,
+      method: "get",
+      
+    })
+    .then(function (response) {
+      setCategory(response.data);
+      
+    })
+    .catch(function (error) {
+      console.log("error");
+    });
+    
+  }
+  useEffect(() => {
+    getData2()
+  }, []);
+  
+    
+
+    // useEffect(() => {
+    //   api
+    //     .get(`/category`)
+    //     .then(function (response) {
+    //       setCategory(response.data);
+    //     })
+    //     .catch(function (error) {
+    //       console.log("error");
+    //     });
+    // }, []);
+    console.log(category ,"nkkjkj");
     console.log(product);
     
    console.log(productsId);
+
    
+   let categorytitle=category?.find((item)=>{
+    return (
+     +item.id===+productsId
+     )
+   })
+
+
+
+   const drawer = (
+    <Box  sx={{ color: '#00897b', position:"absolute", top:"13vh" , right:"0",display:{xs:"none",md:"block"}}}>
+          
+
+        <List>
+            {category?.map((text) =>(
+                <div key={text.id}>
+                    <ListItem 
+                    //  button sx={{
+                    //     display: 'flex',
+                    //     transition: "transform .3s linear",
+                    //     "a": {color: '#9393ce'},
+                    //     "&:hover": {transform: "scale(1.1) translateX(10px)"}
+                    // }}
+                    >
+                        {/* <figure style={{width: '50px', height: '50px', borderRadius: '50%', margin: '0 0 0 8px'}}>
+                            <img style={{width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%'}}
+                                 src={`http://localhost:3002/files/${text.icon}`} alt=""/>
+                        </figure> */}
+                        
+                        <Link to={`/category/${text.id}`} style={{textDecoration:"none"}}>
+                           <Typography variant="h5">{text.name}</Typography> 
+                            
+                        </Link>
+                    </ListItem>
+                    {/* <ListItem button sx={{
+                        display: 'flex',
+                        alignItems: 'start',
+                        flexDirection: 'column',
+                        "&:hover": {backgroundColor: 'inherit'},
+                        "a": {color: '#9393ce'}
+                    }}>
+                        {subCategoriesData.subcategories.filter(sub => sub.category === text.id).map(subcategroy => {
+                            return (
+                                <MenuItem key={subcategroy.name}> <Link to='/'>{subcategroy.name}</Link></MenuItem>
+                            )
+                        })}
+                    </ListItem> */}
+                </div>
+            ))}
+        </List>
+
+    </Box>
+);
+
+
   //  const getSelec =() => {
   //   const select = product.filter(
   //     (item) => item.category === productsId);
@@ -63,105 +162,85 @@ export default function Categorypage() {
   const sections= product.map(items=>{
   if(items.category===productsId){
     return(
- 
+
+
+
+
       <Grid sx={{mb: 1}} key={items.id} justifyContent="center" item xs={12} sm={6} lg={4}>
       <ProductCard 
                  data={items}/>
   </Grid>
- 
+
   
     )}})
 
 
-  
+return(
+<Box >
+{/* <Box
+                    component="nav"
+                    sx={{width: {md:" 300px"}, flexShrink: {sm: 0} ,position:"absolute"}}
+                    aria-label="mailbox folders"
+                > */}
+                    {/* <Drawer
+                        // container={container}
+                        variant="temporary"
+                        open={mobileOpen}
+                        onClose={handleDrawerToggle}
+                        ModalProps={{
+                            keepMounted: true, // Better open performance on mobile.
+                        }}
+                        sx={{
+                            display: {xs: 'block', sm: 'none'},
+                            '& .MuiDrawer-paper': {boxSizing: 'border-box', width:" 300px"},
+                        }}
+                    >
+                        {drawer}
+                    </Drawer> */}
+                    {/* <Drawer
+                        variant="permanent"
+                        sx={{
+                            top: 'initial',
+                            display: {xs: 'none', md: 'block'},
+                            width:"300px"
+                            // '& .MuiDrawer-paper': {
+                            //     boxSizing: 'border-box',
+                            //     width: "300px",
+                            //     paddingTop: '70px',
+                            //     zIndex: '0'
+                            // },
+                        }}
+                        open
+                    >
+                        {drawer}
+                    </Drawer> */}
+                     {/* <Drawer
+        sx={{
+          position:"absolute",top:"10vh",
+          width: drawerWidth,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
+           
+            width: drawerWidth,
+            boxSizing: 'border-box',
+          },
+        }}
+        variant="permanent"
+        anchor="right"
+      > {drawer}</Drawer>
+                </Box> */}
 
 
-return(<>
-  <Grid container spacing={3} sx={{textAlign:{xs: "center"}}}>
+{drawer}
+<Typography variant="h5" align='center'sx={{mb:5,mt:4}}> محصولات گروه {categorytitle?.name} </Typography>
+  <Grid container spacing={3} sx={{textAlign:{xs: "center"} , width:{md:"88vw",xs:"100vw"}}}>
   {sections}
    </Grid>
   
-  </>
+  </Box>
 )
 }
 
 
-// const sections = category.map(categoryy => {
-//   return (
-//       <Section limitness={false} id={categoryy.id} key={categoryy.id} title={categoryy.name}
-//                data={product.filter(productt => +productt.category === categoryy.id)}/>
-//   )
-// })
 
-
-// return(<>
-// {sections}
-// </>
-// )}
-
-    // if(+product.category===productsId){
-    //   product.map(item=>{
-    //     return (
-    //     <>
-    //     <Grid sx={{mb: 1}} key={item.id} justifyContent="center" item xs={12} sm={6} lg={4}>
-    //     <ProductCard data={item}/>
-    // </Grid>
-    // </>)
-    //   }
-    // )
-
-    // }}
-    // return (
-    //         <Grid sx={{mb: 1}} key={product.id} justifyContent="center" item xs={12} sm={6} lg={4}>
-    //         <ProductCard data={product}/>
-    //     </Grid>
-      // <Section limitness={false} id={productsId} key={productsId} title={"k"}
-      //            data={product.filter(productt => +productt.category === productsId)}/>
-    //     <Grid sx={{mb: 1}} key={product.id} justifyContent="center" item xs={12} sm={6} lg={4}>
-    //         <ProductCard data={product}/>
-    //     </Grid>
-    // )
-    
-
-
-  // useEffect(() => {
-  //   axios({
-  //     url: "http://localhost:3002/category",
-  //     method: "get",
-  //   })
-  //     .then(function (response) {
-  //       setcategorys(response.data);
-  //     })
-  //     .catch(function (error) {
-  //       console.log("error");
-  //     });
-  // }, []);
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       setLoading(true);
-  //       const response = await api.get( url);
-      
-  //       setData(response);
-  //     } catch (error) {
-  //       setError(error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   })();
-  // }, [url]);
-  
-  // const { data, loading, error } = useFetch(
-  //   `/products`
-  // );
-
-  
- 
-
-    // <>
-    // {product.map(item=>{
-    //   return(<h1>{item.name}</h1>)
-     
-    // })}
-    // </>
   

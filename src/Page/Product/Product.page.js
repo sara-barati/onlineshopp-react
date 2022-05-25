@@ -95,17 +95,17 @@ export default function Productpage() {
     height:"100vh",bgcolor:"#fafafa"}}>
       <Box
         sx={{
-          width: "80vw",
-          height: "70vh",
+          width: "83vw",
+          height: "80vh",
           bgcolor:"White",
           position:"absolute",
           top:"20vh",
           bottom: "10vh",
-          left: "10vw",
+          left: "8vw",
           display: "flex",
           alignItems: "center",
           justifyContent: "end",
-          boxShadow: " 0.5px 1px #c5cae9",
+         
           
         }}
       >

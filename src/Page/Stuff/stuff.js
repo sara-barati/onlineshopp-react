@@ -10,6 +10,10 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Modal from '@mui/material/Modal';
+import Swal from 'sweetalert2';
+import deletProduct from "hook/deletProduct";
+
 
 import {
   CircularProgress,
@@ -20,12 +24,32 @@ import {
 } from "@mui/material";
 import Header from "Layout/Main/components/Header/Header.comonent";
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: "min(600px,100%)",
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  maxHeight: '700px',
+  overflowY: 'auto',
+  boxShadow: 24,
+  p: 4,
+};
+
 export default function Stuff() {
   const [Product, setproduct] = useState([]);
   const [Categroys, setcategorys] = useState([]);
   const [total, setTotal] = useState("");
   const limit = useMemo(() => 4, []);
   const [page, setPage] = useState(1);
+  const [open, setOpen] = React.useState(false);
+  const [delet, setDelet] = useState("");
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+
   const url = `http://localhost:3002/products?_page=${page}&_limit=${limit}}`;
 
   const getData = (page) => {
@@ -62,6 +86,39 @@ export default function Stuff() {
       });
   }, []);
   console.log(Product);
+
+
+
+
+  
+  
+  const handleDeleteStuff = (id) => {
+   
+    
+    Swal.fire({
+      title: 'مطمعنی؟',
+      text: "بعد از حذف هیچ راه بازگشتی نیست!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'حذف کن',
+      cancelButtonText:'لغو عملیات'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+
+const idproduct=id;
+deletProduct(idproduct)
+
+            Swal.fire(
+                'پاک شد!',
+                'محصول مورد نظر با موفقیت حذف شد.',
+                'success'
+            )
+        }
+    })
+}
+
   // if (error) {
   //   return (
   //     <>
@@ -85,9 +142,26 @@ export default function Stuff() {
           pl: "1.5%",
           pr: "1.5%",
         }}
+        onClick={handleOpen}
       >
         افزودن کالا
       </Button>
+
+                    <Modal
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                    >
+                        <Box sx={style}>
+
+                            {/* <StuffForm onClose={handleClose} types='add'
+                                       categories={!categoriesData.loading && categoriesData}/> */}
+                        </Box>
+                    </Modal>
+
+
+
       <Box
         sx={{
           display: "flex",
@@ -154,11 +228,18 @@ export default function Stuff() {
                     </TableCell>
                     <TableCell align="right">
                       {" "}
-                      <Link to="">
+                      {/* <Link to="">
                         <DeleteIcon
                           sx={{ color: "black", fontSize: "medium" }}
                         />{" "}
-                      </Link>
+                      </Link> */}
+                      <button onClick={() => handleDeleteStuff(item.id)}
+                            style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                        <DeleteIcon
+                          sx={{ color: "black", fontSize: "medium" }}
+                        />
+                    </button>
+
                     </TableCell>
                   </TableRow>
                 ))}
