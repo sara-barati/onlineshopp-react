@@ -8,8 +8,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
- import {CircularProgress,Pagination,Box,Typography} from "@mui/material";
-import { Link } from 'react-router-dom';
+ import {Pagination,Box} from "@mui/material";
+
 import Button from '@mui/material/Button';
 
 export default function Entities(){
@@ -89,8 +89,8 @@ export default function Entities(){
       >
 
            <TableCell align="right">{item.name}</TableCell>
-           <TableCell style={{padding:"26px"}}>{item.price}</TableCell>
-          <TableCell>{item.count}</TableCell>
+           <TableCell align="right" style={{padding:"26px"}}>{item.price}</TableCell>
+          <TableCell align="right">{item.count}</TableCell>
      </TableRow>
       </>
        )

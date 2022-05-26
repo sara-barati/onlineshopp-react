@@ -10,10 +10,10 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Modal from '@mui/material/Modal';
-import Swal from 'sweetalert2';
+import Modal from "@mui/material/Modal";
+import Swal from "sweetalert2";
 import deletProduct from "hook/deletProduct";
-
+import StuffFormcomponent from "./components/StuffForm.component";
 
 import {
   CircularProgress,
@@ -25,15 +25,15 @@ import {
 import Header from "Layout/Main/components/Header/Header.comonent";
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: "min(600px,100%)",
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  maxHeight: '700px',
-  overflowY: 'auto',
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  maxHeight: "700px",
+  overflowY: "auto",
   boxShadow: 24,
   p: 4,
 };
@@ -46,9 +46,24 @@ export default function Stuff() {
   const [page, setPage] = useState(1);
   const [open, setOpen] = React.useState(false);
   const [delet, setDelet] = useState("");
+  const [EditId, setEditId] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  const [openEdit, setOpenEdit] = React.useState(false);
+  const handleOpenEdit = (id) => {
+    setOpenEdit(true)
+    setEditId(id)
+};
+const handleCloseEdit = () => setOpenEdit(false);
+const [productInfo, setProductInfo] = useState({
+  name: "",
+  price: null,
+  quantity: null,
+  category: null,
+  image: null,
+  description: "",
+  thumbnail: null
+})
 
   const url = `http://localhost:3002/products?_page=${page}&_limit=${limit}}`;
 
@@ -87,49 +102,43 @@ export default function Stuff() {
   }, []);
   console.log(Product);
 
-
-
-
-  
-  
   const handleDeleteStuff = (id) => {
-   
-    
     Swal.fire({
-      title: 'مطمعنی؟',
+      title: "مطمعنی؟",
       text: "بعد از حذف هیچ راه بازگشتی نیست!",
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'حذف کن',
-      cancelButtonText:'لغو عملیات'
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "حذف کن",
+      cancelButtonText: "لغو عملیات",
     }).then(async (result) => {
       if (result.isConfirmed) {
+        const idproduct = id;
+        deletProduct(idproduct);
 
-const idproduct=id;
-deletProduct(idproduct)
-
-            Swal.fire(
-                'پاک شد!',
-                'محصول مورد نظر با موفقیت حذف شد.',
-                'success'
-            )
-        }
-    })
-}
-
-  // if (error) {
-  //   return (
-  //     <>
-  //       <Typography variant="body1">ERROR - Typography Body1</Typography>
-  //       <Typography variant="body2">ERROR - Typography Body2</Typography>
-  //     </>
-  //   );
-  // }
+        Swal.fire("پاک شد!", "محصول مورد نظر با موفقیت حذف شد.", "success");
+      }
+    });
+  };
 
   return (
     <>
+      <Modal
+
+open={openEdit}
+onClose={handleCloseEdit}
+aria-labelledby="modal-modal-title"
+aria-describedby="modal-modal-description"
+>
+<Box sx={style}>
+    <StuffFormcomponent onClose={handleCloseEdit} info={productInfo} editId={EditId} types='edit'
+   categories={Categroys}/>
+</Box>
+</Modal>
+
+
+
       <Button
         variant="contained"
         sx={{
@@ -147,20 +156,19 @@ deletProduct(idproduct)
         افزودن کالا
       </Button>
 
-                    <Modal
-                        open={open}
-                        onClose={handleClose}
-                        aria-labelledby="modal-modal-title"
-                        aria-describedby="modal-modal-description"
-                    >
-                        <Box sx={style}>
-
-                            {/* <StuffForm onClose={handleClose} types='add'
-                                       categories={!categoriesData.loading && categoriesData}/> */}
-                        </Box>
-                    </Modal>
-
-
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+        <StuffFormcomponent onClose={handleClose} 
+        types='add'
+            categories={Categroys}
+                                       />
+        </Box>
+      </Modal>
 
       <Box
         sx={{
@@ -221,10 +229,33 @@ deletProduct(idproduct)
                       }
                     })}
                     <TableCell align="right">
-                      {" "}
+                      {/* {" "}
                       <Link to="">
                         <EditIcon sx={{ color: "black", fontSize: "medium" }} />{" "}
-                      </Link>
+                      </Link> */}
+                                     <button onClick={() => {
+                        handleOpenEdit(item.id)
+                        setProductInfo({
+                            name: item.name,
+                            price: item.price,
+                            quantity: item.count,
+                            category: item.category,
+                            image: item.image,
+                            description: item.description,
+                            thumbnail: item.thumbnail
+                        })
+
+
+                    }}
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                marginBottom: '3px'
+                            }}>
+                        <EditIcon sx={{ fontSize: "medium" }}/>
+
+                    </button>
                     </TableCell>
                     <TableCell align="right">
                       {" "}
@@ -233,13 +264,18 @@ deletProduct(idproduct)
                           sx={{ color: "black", fontSize: "medium" }}
                         />{" "}
                       </Link> */}
-                      <button onClick={() => handleDeleteStuff(item.id)}
-                            style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                      <button
+                        onClick={() => handleDeleteStuff(item.id)}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
                         <DeleteIcon
                           sx={{ color: "black", fontSize: "medium" }}
                         />
-                    </button>
-
+                      </button>
                     </TableCell>
                   </TableRow>
                 ))}
