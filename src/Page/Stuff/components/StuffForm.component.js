@@ -36,7 +36,7 @@ export default function StuffFormcomponent({categories, types, editId, info, onC
             value: categories?.find(category => category.id === +info.category).id
         })
 
-        setImg(info.image)
+        setImg([info.image])
     }
 }, [editId])
 
@@ -47,11 +47,11 @@ const[select,setSElect]=useState("")
 
 const imageList =
  img?.length > 0 &&
- img?.map(img => {
+ img?.map(imgt => {
 
   return {
-      value: img,
-      label: <img style={{width: '70px', height: '70px'}} src={`http://localhost:3002/files/${img}`}/>
+      value: imgt,
+      label: <img style={{width: '70px', height: '70px'}} src={`http://localhost:3002/files/${imgt}`}/>
   }
 })
 
@@ -359,7 +359,7 @@ const handleDeleteImage = (index) => {
                 />
 
 <Box sx={{display: 'flex', justifyContent: 'center', mt: 2}}>
-                            <Button type='submit' size='large' color='info' variant='contained'>ذخیره</Button>
+                            <Button type='submit' size='large' color='info'  variant='contained'>ذخیره</Button>
                         </Box>
 
             </Box>
