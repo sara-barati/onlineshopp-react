@@ -8,8 +8,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
- import {CircularProgress,Pagination,Box,Typography} from "@mui/material";
-import { Link } from 'react-router-dom';
+ import {Pagination,Box} from "@mui/material";
+
 import Button from '@mui/material/Button';
 
 export default function Entities(){
@@ -89,8 +89,8 @@ export default function Entities(){
       >
 
            <TableCell align="right">{item.name}</TableCell>
-           <TableCell style={{padding:"26px"}}>{item.price}</TableCell>
-          <TableCell>{item.count}</TableCell>
+           <TableCell align="right" style={{padding:"26px"}}>{item.price}</TableCell>
+          <TableCell align="right">{item.count}</TableCell>
      </TableRow>
       </>
        )
@@ -104,7 +104,7 @@ export default function Entities(){
 variant="outlined"
 defaultPage={1}
 page={page}
-count={Math.ceil(32/ limit)}
+count={Math.ceil(32/limit)}
 // Math.ceil(total data / limit)
 // 6 / 4 = 1
 sx={{mb:"3%"}}
@@ -112,121 +112,4 @@ onChange={(_, page) => setPage(page)}
 />
 </Box>
 </>
-)
-/*     
-//         <TableCell align="right"></TableCell>
-//           <table dir="rtl">
-//             <tr>
-//               <th>نام کالا</th>
-//               <th>قیمت</th>
-//               <th>موجودی</th>
-//             </tr>
-//             {product.map((item) => {
-             */}
-//                 return (
-//                   <tr>
-//                     <td>{item.name}</td>
-//                     <td style={{padding:"30px"}}>{item.price}</td>
-//                     <td>{item.count}</td>
-//                   </tr>
-//                 )
-              
-//             })}
-//           </table>
-
-
-//         </div>
-
-
-//       }
-// </Table>
-// </TableContainer>
-// </Box>
-//     </>
-//   )
-// }
-
-// <TableContainer component={Paper} dir="rtl" sx={{width:"45vw" , height:{},alignContent:"center", ml:"25%",mr:"outo%", textAlign:"center", mt:"5%"}}aria-label="customized table" >
-// <Table>
-//   <TableHead>
-//     <TableRow>
-//       <TableCell>تصویر</TableCell>
-//       <TableCell align="right">نام کالا</TableCell>
-//       <TableCell align="right">دسته بندی</TableCell>
-//       <TableCell align="right">ویرایش</TableCell>
-//       <TableCell align="right">حذف</TableCell>
-//     </TableRow>
-//   </TableHead>
-//   <TableBody >
-//   {/* <Box
-//           sx={{
-//             position: "absolute",
-//             background: "#fafafa",
-//             width: "100%",
-//             height: "100%",
-//             display: "flex",
-//             alignItems: "center",
-//             justifyContent: "center"
-//           }}
-//         >
-//           <CircularProgress />
-//         </Box> */}
-//         <>
-    
-//     {Product.map((item) => (
-//       <TableRow
-//         key={item.name}
-       
-//       >
-      
-    
-//         <TableCell align="right">
-
-//           <div style={{ width: "40px", height: "40px" }}>
-    
-//             <img
-//               style={{ width: "100%", height: "100%" }}
-//               src={`http://localhost:3002/files/${item.thumbnail}`}
-//               alt=""
-//             />
-//           </div>
-//         </TableCell>
-//         <TableCell align="right">
-//           {item.name}
-//         </TableCell>
-//         {Categroys?.map((categroyItem) => {
-//           if (categroyItem.id == item.category) {
-//             return (
-//               <>
-//                 <TableCell align="right"> {categroyItem.name}</TableCell>{" "}
-//               </>
-//             );
-//           }
-//         })}
-//         <TableCell align="right">
-//           {" "}
-//           <Link to="">ویرایش </Link>
-//         </TableCell>
-//         <TableCell align="right">
-//           {" "}
-//           <Link to="">حذف </Link>
-//         </TableCell>
-//       </TableRow>
-//     ))}
-//     </>
-//   </TableBody>
-// </Table>
-// </TableContainer>
-// <Pagination
-// variant="outlined"
-// defaultPage={1}
-// page={page}
-// count={Math.ceil(24/ limit)}
-// // Math.ceil(total data / limit)
-// // 6 / 4 = 1
-// onChange={(_, page) => setPage(page)}
-// />
-// </Box>
-// </>
-// );
-// }
+)}

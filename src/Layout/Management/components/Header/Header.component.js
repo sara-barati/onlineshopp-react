@@ -74,7 +74,7 @@ export default function Headercomponent() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-evenly",
-                  backgroundColor: "#dcedc8",
+                  backgroundColor: "#c5e1a5",
                   textAlign: "center",
                   height: "50px",
                   borderRadius: "8px",
@@ -88,14 +88,14 @@ export default function Headercomponent() {
                 };
               }}
             >
-              <Link style={{ textDecoration: "none" }}   onClick={() => handleActive(1)} to={"/dashboard/stuff"}>
+              <Link style={{ textDecoration: "none" , color:"#33691e"}}   onClick={() => handleActive(1)} to={"/dashboard/stuff"}>
                 کالاها{" "}
               </Link>
-              <Link style={{ textDecoration: "none" }} onClick={() => handleActive(2)} to={"/dashboard/entities"}>
+              <Link style={{ textDecoration: "none" ,color:"#33691e"}} onClick={() => handleActive(2)} to={"/dashboard/entities"}>
                 {" "}
                 موجودی و قیمت ها
               </Link>
-              <Link style={{ textDecoration: "none" }} onClick={() => handleActive(3)} to={"/dashboard/order"}>
+              <Link style={{ textDecoration: "none",color:"#33691e" }} onClick={() => handleActive(3)} to={"/dashboard/order"}>
                 {" "}
                 سفارش ها
               </Link>
@@ -114,12 +114,11 @@ export default function Headercomponent() {
                     my: 2,
                     color: "white",
                     display: "flex",
-                    fontSize: "1.2rem",
                     marginRight: "15px",
                    bgcolor: "#558b2f"
                   }}
                 >
-                  <ArrowForwardIcon sx={{ marginLeft: "8px" }} />
+                  {/* <ArrowForwardIcon sx={{ marginLeft: "8px" }} /> */}
                   بازگشت به سایت
                 </Button>
                 <Button
@@ -127,9 +126,10 @@ export default function Headercomponent() {
                     my: 2,
                     color: "white",
                     display: "flex",
-                    fontSize: "1.2rem",
+                    // fontSize: "1.2rem",
                     marginRight: "15px",
-                    bgcolor: "#558b2f"
+                    bgcolor: "#558b2f",
+                  
                   }}
                   onClick={() => {
                     localStorage.clear();
