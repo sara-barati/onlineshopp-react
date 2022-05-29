@@ -66,7 +66,7 @@ export default function Productpage() {
   console.log(details);
   let productCategory = "";
   if (details) {
-    productCategory = category.find((categoryitem) => {
+    productCategory =category.find((categoryitem) => {
       return +details.category === +categoryitem.id;
     });
     console.log(productCategory);

@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from "axios";
-import { useEffect,useState } from 'react';
+import { useEffect,useState,useMemo } from 'react';
 import { ProductCard } from 'Component/ProductCard/ProductCard.component';
 import {api} from "api/api";
 import { useFetch } from 'hook/useFetch';
@@ -25,9 +25,11 @@ export default function Categorypage() {
   const {productsId} = useParams()
   const [product, setProduct] = useState([]);
   const[category,setCategory]=useState([]);
-  const[data,setData]=useState([])
-
+  const[data,setData]=useState([]);
+  const limit = useMemo(() => 4, []);
+  const [page, setPage] = useState(1);
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [total, setTotal] = useState("");
 
   const handleDrawerToggle = () => {
       setMobileOpen(!mobileOpen);
@@ -39,7 +41,7 @@ export default function Categorypage() {
 
  
 
-  const url = `http://localhost:3002/products`;
+  const url = `http://localhost:3002/products?category=${productsId}&_page=${page}&_limit=${limit}`;
   const getData=()=>{
     axios({
       url: url,
@@ -48,7 +50,9 @@ export default function Categorypage() {
     })
       .then(function (response) {
         setProduct(response.data);
+        setTotal(response.headers["x-total-count"]);
         
+        console.log(product);
       })
       .catch(function (error) {
         console.log("error");
@@ -56,8 +60,8 @@ export default function Categorypage() {
       
     }
     useEffect(() => {
-      getData()
-    }, []);
+      getData(page)
+    }, [productsId,page]);
     
 
    const url2 = `http://localhost:3002/category`;
@@ -159,8 +163,10 @@ export default function Categorypage() {
   // };
 
  
-  const sections= product.map(items=>{
-  if(items.category===productsId){
+  // const sections= product.map(items=>{
+  // if(items.category===productsId){
+    const sections = product.map(items=>{
+
     return(
 
 
@@ -172,9 +178,22 @@ export default function Categorypage() {
   </Grid>
 
   
-    )}})
+    )})
 
 
+
+
+// for (let i = 0; i < sections.length; i+4) {
+//   let x=[]
+//  x=sections[i]
+// setPage(x) 
+//  x=null
+  
+// }
+// useEffect(() => {
+// setPage(sections.splice(-4))
+// }, [page]);
+// setPage(sections.splice(0,4))
 return(
 <Box >
 {/* <Box
@@ -236,7 +255,17 @@ return(
   <Grid container spacing={3} sx={{textAlign:{xs: "center"} , width:{md:"88vw",xs:"100vw"}}}>
   {sections}
    </Grid>
+   <Pagination
+          variant="outlined"
+          defaultPage={1}
+          page={page}
+   
+          count={Math.ceil(total / limit)}
+         
+          sx={{ mb: "3%" }}
   
+          onChange={(_, page) => setPage(page)}
+        />
   </Box>
 )
 }
