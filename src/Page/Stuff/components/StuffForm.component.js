@@ -230,7 +230,7 @@ const handleDeleteImage = (index) => {
   return (
     <>
     {types==='add'?
-        <Box sx={{display: 'flex', flexDirection: "column", justifyContent: 'center', alignItems: 'start'}}>
+        <Box   dir="rtl" sx={{display: 'flex', flexDirection: "column", justifyContent: 'center', alignItems: 'start'}}>
 
             <Box sx={{display: "flex", justifyContent: 'space-between', alignItems: 'center', width: '100%'}}>
                 <Typography align='right'>
@@ -384,7 +384,8 @@ const handleDeleteImage = (index) => {
          </Box> :
 
          // jsx for edit modal
-         <Box sx={{
+         <Box
+         dir="rtl"  sx={{
              display: 'flex',
              flexDirection: "column",
              justifyContent: 'center',
