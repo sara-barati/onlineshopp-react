@@ -116,7 +116,8 @@ const [productInfo, setProductInfo] = useState({
       if (result.isConfirmed) {
         const idproduct = id;
         deletProduct(idproduct);
-        window.location.reload()
+        // getData(page);
+        // window.location.reload()
         Swal.fire("پاک شد!", "محصول مورد نظر با موفقیت حذف شد.", "success");
       }
     });

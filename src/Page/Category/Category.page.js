@@ -84,18 +84,7 @@ export default function Categorypage() {
     getData2()
   }, []);
   
-    
 
-    // useEffect(() => {
-    //   api
-    //     .get(`/category`)
-    //     .then(function (response) {
-    //       setCategory(response.data);
-    //     })
-    //     .catch(function (error) {
-    //       console.log("error");
-    //     });
-    // }, []);
     console.log(category ,"nkkjkj");
     console.log(product);
     
@@ -117,37 +106,15 @@ export default function Categorypage() {
         <List>
             {category?.map((text) =>(
                 <div key={text.id}>
-                    <ListItem 
-                    //  button sx={{
-                    //     display: 'flex',
-                    //     transition: "transform .3s linear",
-                    //     "a": {color: '#9393ce'},
-                    //     "&:hover": {transform: "scale(1.1) translateX(10px)"}
-                    // }}
-                    >
-                        {/* <figure style={{width: '50px', height: '50px', borderRadius: '50%', margin: '0 0 0 8px'}}>
-                            <img style={{width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%'}}
-                                 src={`http://localhost:3002/files/${text.icon}`} alt=""/>
-                        </figure> */}
+                    <ListItem >
+              
                         
                         <Link to={`/category/${text.id}`} style={{textDecoration:"none"}}>
                            <Typography variant="h5">{text.name}</Typography> 
                             
                         </Link>
                     </ListItem>
-                    {/* <ListItem button sx={{
-                        display: 'flex',
-                        alignItems: 'start',
-                        flexDirection: 'column',
-                        "&:hover": {backgroundColor: 'inherit'},
-                        "a": {color: '#9393ce'}
-                    }}>
-                        {subCategoriesData.subcategories.filter(sub => sub.category === text.id).map(subcategroy => {
-                            return (
-                                <MenuItem key={subcategroy.name}> <Link to='/'>{subcategroy.name}</Link></MenuItem>
-                            )
-                        })}
-                    </ListItem> */}
+ 
                 </div>
             ))}
         </List>
@@ -156,15 +123,6 @@ export default function Categorypage() {
 );
 
 
-  //  const getSelec =() => {
-  //   const select = product.filter(
-  //     (item) => item.category === productsId);
-  //   setData(select)
-  // };
-
- 
-  // const sections= product.map(items=>{
-  // if(items.category===productsId){
     const sections = product.map(items=>{
 
     return(
@@ -183,71 +141,10 @@ export default function Categorypage() {
 
 
 
-// for (let i = 0; i < sections.length; i+4) {
-//   let x=[]
-//  x=sections[i]
-// setPage(x) 
-//  x=null
-  
-// }
-// useEffect(() => {
-// setPage(sections.splice(-4))
-// }, [page]);
-// setPage(sections.splice(0,4))
+
 return(
 <Box >
-{/* <Box
-                    component="nav"
-                    sx={{width: {md:" 300px"}, flexShrink: {sm: 0} ,position:"absolute"}}
-                    aria-label="mailbox folders"
-                > */}
-                    {/* <Drawer
-                        // container={container}
-                        variant="temporary"
-                        open={mobileOpen}
-                        onClose={handleDrawerToggle}
-                        ModalProps={{
-                            keepMounted: true, // Better open performance on mobile.
-                        }}
-                        sx={{
-                            display: {xs: 'block', sm: 'none'},
-                            '& .MuiDrawer-paper': {boxSizing: 'border-box', width:" 300px"},
-                        }}
-                    >
-                        {drawer}
-                    </Drawer> */}
-                    {/* <Drawer
-                        variant="permanent"
-                        sx={{
-                            top: 'initial',
-                            display: {xs: 'none', md: 'block'},
-                            width:"300px"
-                            // '& .MuiDrawer-paper': {
-                            //     boxSizing: 'border-box',
-                            //     width: "300px",
-                            //     paddingTop: '70px',
-                            //     zIndex: '0'
-                            // },
-                        }}
-                        open
-                    >
-                        {drawer}
-                    </Drawer> */}
-                     {/* <Drawer
-        sx={{
-          position:"absolute",top:"10vh",
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-           
-            width: drawerWidth,
-            boxSizing: 'border-box',
-          },
-        }}
-        variant="permanent"
-        anchor="right"
-      > {drawer}</Drawer>
-                </Box> */}
+
 
 
 {drawer}
@@ -262,7 +159,7 @@ return(
    
           count={Math.ceil(total / limit)}
          
-          sx={{ mb: "3%" }}
+          sx={{ mb:"1%",ml:"45%" , mr:"outo", pt:"10px" }}
   
           onChange={(_, page) => setPage(page)}
         />

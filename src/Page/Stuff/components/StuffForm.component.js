@@ -56,7 +56,21 @@ const imageList =
 })
 
 
+const handleChangeType = (inp, value) => {setType(value)}
 
+// const handleChangeType = (inp, value) => {
+//     console.log('Value Changed');
+//     switch (inp) {
+//         case 'category': {
+
+//             setType(value)
+
+//             break
+//         }
+//         default:
+//             break
+//     }
+// };
   const options= categories?.map(category => {
     return {
         value: category.id,
@@ -76,25 +90,23 @@ const submitUploadForm = async (e) => {
      toast.success('عکس با موفقیت آپلود شد.')
     const res= formimg(formData);
      // const res = await dispatch(upload(formData))
-
+console.log(res);
      setImg((prevImg) => [...prevImg, res.data])
  } else {
      toast.error('حداقل یک عکس آپلود کنید')
  }
 
-
 };
+
 
 const handleSubmitAll = (event) => {
   event.preventDefault();
-
-
   const form = new FormData(event.currentTarget);
   const data = Object.fromEntries(form);
 
   data.image = img;
   data.thumbnail = img[0];
-  // data.category = type.value;
+  data.category = type.value;
   data.description = editorText
   console.log(data)
   let schema = yup.object().shape({
@@ -141,7 +153,7 @@ const handleSubmitAll = (event) => {
                       .catch(function (error) {
                         console.log("error");
                       });
-                
+                     
                 //   useEffect(() => {
                 //     postData(url);
                 //   }, [url]);
@@ -157,31 +169,32 @@ const handleSubmitAll = (event) => {
 
 
 
-                //   const urlput=`http://localhost:3002/products/${editId}`;
+                  const urlput=`http://localhost:3002/products/${editId}`;
           
-                //   axios({
-                //     url: urlput,
-                //     method: "put",
-                //     data:data,
-                //     // id:editId,
-                //     headers: {
-                //       "Content-Type": "multipart/form-data"
-                //     },
+                  axios({
+                    url: urlput,
+                    method: "put",
+                    data:data,
+                    id:editId,
+                    headers: {
+                      "Content-Type": "multipart/form-data"
+                    },
               
-                //   })
-                //     .then(function (response) {
+                  })
+                    .then(function (response) {
                    
-                //       console.log(response.data);
+                      console.log(response.data);
                       
-                //     })
-                //     .catch(function (error) {
-                //       console.log("error");
-                //     });
-              
-                  const put=putData(editId,data)
+                    })
+                    .catch(function (error) {
+                      console.log("error");
+                    });
                 
-                  setUpdate(!update)
-                  onClose()
+              
+                //   const put=putData(editId,data)
+                
+                //   setUpdate(!update)
+                //   onClose()
               }
 
           } else {
@@ -220,20 +233,22 @@ const handleDeleteImage = (index) => {
         <Box sx={{display: 'flex', flexDirection: "column", justifyContent: 'center', alignItems: 'start'}}>
 
             <Box sx={{display: "flex", justifyContent: 'space-between', alignItems: 'center', width: '100%'}}>
-                <Typography>
+                <Typography align='right'>
                     افزودن/ویرایش کالا
                 </Typography>
                 <CloseIcon cursor="pointer" onClick={onClose}/>
             </Box>
 
-            <Typography sx={{mt: 1}}>
+            <Typography sx={{mt: 1}} align="right">
                 تصویر کالا :
             </Typography>
 
             <FileUploader
+            
                         onFileSelectSuccess={(file) => setSelectedFile(file)}
                         onFileSelectError={({error}) => alert(error)}
                         handleSubmit={submitUploadForm}
+                        
                     />
 
             <Box
@@ -308,7 +323,7 @@ const handleDeleteImage = (index) => {
                     موجودی کالا :
                 </Typography>
 
-                <input type='number' name='quantity' placeholder='موجودی کالا را وارد نمایید...' style={{
+                <input type='number' name='count' placeholder='موجودی کالا را وارد نمایید...' style={{
                     width: '100%',
                     height: '55px',
                     border: '1px solid #ccc',
@@ -340,7 +355,8 @@ const handleDeleteImage = (index) => {
                 /> */}
 
 <Select options={options} 
- placeholder='دسته ی مورد نظر را انتخاب یا ایجاد کنید...'
+ onChange={(value) => handleChangeType('category', value)}
+ placeholder='دسته ی مورد نظر را انتخاب  کنید...'
  />
 
                 {/*create ck-editor*/}
@@ -361,7 +377,7 @@ const handleDeleteImage = (index) => {
 <Box sx={{display: 'flex', justifyContent: 'center', mt: 2}}>
                             <Button type='submit' size='large' color='info'  variant='contained'>ذخیره</Button>
                         </Box>
-
+                       <ToastContainer/>
             </Box>
 
         
@@ -482,7 +498,9 @@ const handleDeleteImage = (index) => {
                      دسته کالا :
                  </Typography>
                  <Select options={options} 
- placeholder='دسته ی مورد نظر را انتخاب یا ایجاد کنید...'
+                 value= {type}
+                  onChange={(value) => handleChangeType('category', value)}
+ placeholder='دسته ی مورد نظر را انتخاب کنید...'
  />
                  {/* <CreatableSelect
                      name='category'

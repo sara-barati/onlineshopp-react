@@ -2,6 +2,7 @@ import React, {useRef} from 'react'
 import Button from "@mui/material/Button";
 import {Input} from "@mui/icons-material";
 import Box from "@mui/material/Box";
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function FileUploader  ({onFileSelectSuccess, onFileSelectError, handleSubmit}){
     const fileInput = useRef(null)
@@ -32,7 +33,7 @@ export default function FileUploader  ({onFileSelectSuccess, onFileSelectError, 
             <Button type='submit' color='info' variant="contained">
                 Upload
             </Button>
-
+            <ToastContainer />
         </Box>
 
     )
