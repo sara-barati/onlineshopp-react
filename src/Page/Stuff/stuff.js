@@ -115,7 +115,22 @@ const [productInfo, setProductInfo] = useState({
     }).then(async (result) => {
       if (result.isConfirmed) {
         const idproduct = id;
-        deletProduct(idproduct);
+        deletProduct(idproduct).then( ()=>    axios({
+          url: url,
+          method: "get",
+       
+        })
+          .then(function (response) {
+            setproduct(response.data);
+            console.log(response);
+            setTotal(response.headers["x-total-count"]);
+          })
+          .catch(function (error) {
+            console.log("error");
+          })
+    )
+     
+
         // getData(page);
         // window.location.reload()
         Swal.fire("پاک شد!", "محصول مورد نظر با موفقیت حذف شد.", "success");

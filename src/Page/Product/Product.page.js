@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-// import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
@@ -7,22 +7,24 @@ import Modal from "@mui/material/Modal";
 import { Box, Typography } from "@mui/material";
 import NumberFormat from "react-number-format";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
 import { api } from "api/api";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-
 import { ProductCard } from "Component/ProductCard/ProductCard.component";
 // import {Helmet} from "react-helmet";
 import AddLocationIcon from "@mui/icons-material/AddLocation";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import BarChartIcon from "@mui/icons-material/BarChart";
+import { updateOrder } from "Redux/reducer/orderSlice";
 
 export default function Productpage() {
   const [product, setProduct] = useState([]);
   const [category, setCategory] = useState([]);
-  const [counts, setCount] = useState(0);
-
+  const [count, setCount] = useState(0);
+const [orderstate,setOrderstate]=useState([])
+const dispatch=useDispatch()
   const url = `http://localhost:3002/products`;
   const getData = () => {
     axios({
@@ -57,7 +59,7 @@ export default function Productpage() {
   // })
 
   const { productId } = useParams();
-  console.log(product);
+
 
   let details = product.find((deat) => {
     return +deat.id === +productId;
@@ -74,6 +76,61 @@ export default function Productpage() {
   const handleCount = (e) => {
     setCount(e.target.value);
   };
+
+
+ const handleOrder=()=>{
+   console.log("sara");
+  const setOrders = localStorage.getItem('Orders');
+  let orderArr;
+  if (setOrders === null) {
+      orderArr = []
+  } else {
+      orderArr = JSON.parse(setOrders)
+  }
+  if (count > 0) {
+    const productOrder = {
+        id: details.id,
+        name: details.name,
+        count: count,
+        price: details.price,
+        image: details.thumbnail
+    }
+
+    if (orderArr.length > 0) {
+      if(!orderArr.some(el=>el.id===productOrder.id)){
+        orderArr.push(productOrder);
+
+      }
+      else{
+        orderArr.map(
+          item=>{
+            if( item.id===productOrder.id){
+              item.count=productOrder.count
+            }
+           }
+
+        )
+      }
+
+
+    }
+    else{
+      orderArr.push(productOrder);
+    }
+    console.log(productOrder);
+    console.log(orderArr);
+    setOrderstate(orderArr)
+   dispatch(updateOrder(orderArr))
+  localStorage.setItem("Orders", JSON.stringify((orderArr)))
+  toast.success('محصول با موفقیت به سبد خرید افزوده شد ')
+  }
+ else{
+    toast.warning('لطفا تعداد سفارش محصول را مشخص نمایید')
+}
+
+
+
+ }
 
   // <Box>
 
@@ -160,7 +217,7 @@ export default function Productpage() {
             >
               <input
                 min={0}
-                value={counts}
+                value={count}
                 onChange={handleCount}
                 style={{
                   padding: "10px 0",
@@ -171,11 +228,14 @@ export default function Productpage() {
                 max={+details?.count}
                 type="number"
               />
-              <Button sx={{ mx: 2 }} variant="contained" color="success">
+              <Button sx={{ mx: 2 }} variant="contained" color="success"
+              onClick={handleOrder}>
+                
                 <ShoppingCartIcon fontSize="small" />
                 افزودن به سبد خرید
                 {/* <span style={{color: '#f8f8f8'}}>افزودن به سبد خرید</span> */}
               </Button>
+              <ToastContainer/>
             </Box>
           )}
 

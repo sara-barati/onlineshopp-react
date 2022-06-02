@@ -86,7 +86,6 @@ const submitUploadForm = async (e) => {
  // console.dir(e.currentTarget[0].value)
  if (e.currentTarget[0].value !== '') {
      e.currentTarget.reset();
-
      toast.success('عکس با موفقیت آپلود شد.')
     const res= formimg(formData);
      // const res = await dispatch(upload(formData))
