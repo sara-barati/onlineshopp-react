@@ -76,19 +76,11 @@ export default function ShoppingBasketpage() {
         )
       }
     })
-    // const indexDeleteOrder = orders.findIndex((order) => order.id === id);
 
-    // const deleteItem = orders.splice(indexDeleteOrder, 1);
-
-    // ///every time we delete an order update the ui
-    // const d = orders?.filter((item) => {
-    //   return item.id !== deleteItem.id;
-    // });
-    // setOrders(d);
-
-    // localStorage.setItem("Orders", JSON.stringify(orders));
-    // dispatch(updateOrder(orders));
   };
+      const handleTotalPrice = () => {
+      localStorage.setItem('TOTAL_PRICE', JSON.stringify(invoiceTotal))
+  }
 
   return (
     <>
@@ -218,15 +210,15 @@ export default function ShoppingBasketpage() {
                 {invoiceTotal.toLocaleString()}
               </Typography>
             </Box>
-            <Link to={"Buy"} style={{textDecoration:"none"}}>
+            <Link to={"/Buy"} style={{textDecoration:"none"}}>
             <Button
-              // onClick={handleTotalPrice}
+              onClick={handleTotalPrice}
               sx={{ color: "background.paper", p: 2 }}
               variant="contained"
               color="success"
               // navigate("/dashboard/order",  { replace: true })
             >
-              {" "}
+             
               نهایی کردن خرید
             </Button>
             </Link>

@@ -9,10 +9,14 @@ export const orderSlice = createSlice({
     return action.payload
     },
     updateOrder:(state,action)=>{
-        return{...state,...action.payload}
+        return {...state,...action.payload}
+    },
+    deletOrder:(state)=>{
+      return {};
     }
+
 
   },
 })
-export const { setOrder, updateOrder } = orderSlice.actions
+export const { setOrder, updateOrder,deletOrder } = orderSlice.actions
 export default orderSlice.reducer

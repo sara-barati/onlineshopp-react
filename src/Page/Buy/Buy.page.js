@@ -1,13 +1,17 @@
-
-
 import React,{useState} from 'react';
-import ReactDOM from 'react-dom';
+import * as moment from 'jalali-moment';
 import { useFormik } from 'formik';
 import { useFetch } from 'hook/useFetch';
 import * as yup from 'yup';
+import { ToastContainer, toast } from 'react-toastify';
+
 import {
-  DatePicker
+  DatePicker,
+  DateTimePicker,
+  DateRangePicker,
+  DateTimeRangePicker
 } from "react-advance-jalaali-datepicker";
+
 // import Button from '@material-ui/core/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
@@ -18,37 +22,51 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setLogin } from 'Redux/reducer/login.Slice';
 import Buy from 'assets/image/buy.png'
-import { ToastContainer, toast } from 'react-toastify';
 import Grid from '@mui/material/Grid';
 import 'react-toastify/dist/ReactToastify.css';
 const validationSchema = yup.object({
-  username: yup
+  "username": yup
     .string('لطفا نام کاربری خود را وارد کنید')
     .required('پر کردن این فیلد اجباری است')
     .min(3, 'نام کاربری شما باید طولانی تر باشد'),
-  lastName: yup
+  "lastName": yup
     .string('لطفا رمز ورود خود را وارد کنید')
     .min(3, 'رمز ورود شما باید طولانی تر باشد')
     .required('پر کردن این فیلد اجباری است'),
-    address: yup
+    "address": yup
     .string('لطفا نام کاربری خود را وارد کنید')
     .required('پر کردن این فیلد اجباری است')
     .min(3, 'نام کاربری شما باید طولانی تر باشد'),
-    phoneNumber: yup
+    "phoneNumber": yup
     .string()
     .required("لطفا شماره ی همراه خود را وارد کنید")
     .matches(
 /^([0]{1}|\+?[234]{3})([7-9]{1})([0|1]{1})([\d]{1})([\d]{7})$/g,
       "شماره وارد شده معتبر نیست"
-      .max(3, 'نام کاربری شما باید طولانی تر باشد'),
-    ),
+      )
+      .max(13, 'شماره ی  وارد شده نامعتبر میباشد!'),
 });
 
  export default function Buypage() {
   const [expectDate, setExpectDate] = useState()
-  // const dispatch = useDispatch()
-  //  const navigate=useNavigate()
-  // const { data, error } = useFetch(`http://localhost:3002/auth/login`);
+  const products = JSON.parse(localStorage.getItem("Orders"));
+  const total = JSON.parse(localStorage.getItem("TOTAL_PRICE"))
+  var today =  Date.now();
+  let x= moment(new Date(today),'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD')
+  console.log(x , "now");
+
+  const change = (unix, formatted) => {
+    console.log(unix); // returns timestamp of the selected value, for example.
+    setExpectDate(formatted); // returns the selected value in the format you've entered, forexample, "تاریخ: 1396/02/24 ساعت: 18:30".
+    console.log( formatted);
+    console.log(+new Date(expectDate))
+   
+}
+ const DatePickerInput = (props) => {
+        return <input  {...props} />;
+    }
+// Date.parse(expectDate) 
+console.log(Date.parse(expectDate) );
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -57,10 +75,18 @@ const validationSchema = yup.object({
       phoneNumber:""
     },
     validationSchema: validationSchema,
-        onSubmit:()=>{  
+        onSubmit:(values)=>{  
           if(expectDate){
-
+            values.expectAt = typeof expectDate === 'string' ? Date.parse(expectDate) : expectDate
+            values.products = products
+            values.price = total
+            values.delivered = "false"
+            localStorage.setItem("ORDER_INFO", JSON.stringify(values))
+            window.location.replace('http://localhost:5500/')
           }
+else{
+  toast.warning("زمان مورد نظر خود را انتخاب کنید")
+}
 
         }
       }
@@ -89,6 +115,7 @@ const validationSchema = yup.object({
 
                 </Box>
                 <Box component='form'
+                dir="rtl"
                      onSubmit={formik.handleSubmit}
                      sx={{
                          width: 'min(900px,100%)',
@@ -136,31 +163,36 @@ const validationSchema = yup.object({
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <label htmlFor="phone-form">تلفن همراه :</label>
-                            <TextField sx={{marginTop: '7px'}} fullWidth id="phone-form" type='phone'
-                                       name='phone' label="تلفن همراه"
+                            <TextField sx={{marginTop: '7px'}} fullWidth id="phone-form" type='phoneNumber'
+                                       name='phoneNumber' label="تلفن همراه"
                                        variant="outlined"
-                                       value={formik.values.phone}
+                                       value={formik.values.phoneNumber}
                                        onChange={formik.handleChange}
-                                       error={formik.touched.phone && Boolean(formik.errors.phone)}
-                                       helperText={formik.touched.phone && formik.errors.phone}
+                                       error={formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)}
+                                       helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
                             />
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <label htmlFor="expect-form">زمان تحویل :</label>
-                       
-                            <DatePicker
+                            <DateRangePicker
                                 inputComponent={DatePickerInput}
-                                placeholder="انتخاب تاریخ"
+                                placeholderStart="تاریخ شروع"
+                                placeholder={x}
                                 onChange={change}
                                 format="jYYYY/jMM/jDD"
-                                id="datePicker"
-
+                                // id="datePicker"
+                                idStart="rangePickerStart"
+                                
+                                
                             />
-                        </Grid>
+                            
+                       
+              </Grid>
 
                     </Grid>
                     <Button type='submit' sx={{my: 4, color: 'background.paper'}} variant='contained'
                             color='success'>پرداخت</Button>
+                           <ToastContainer/>
                 </Box>
             </Box>
   );
