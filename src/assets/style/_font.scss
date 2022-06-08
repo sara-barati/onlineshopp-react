@@ -1,0 +1,37 @@
+
+$font-format-1: 'woff';
+$font-family-2: 'IranSanse';
+$font-url-2: '../font/IranSanse';
+$font-format-2: 'woff2';
+
+
+
+@font-face {
+  font-family: $font-family-2;
+  src: url("#{$font-url-2}/IRANSansX-Regular.woff") format($font-format-1);
+}
+
+@font-face {
+  font-family: '#{$font-family-2}-medium';
+  src: url("#{$font-url-2}/IRANSansWeb_Medium.woff") format($font-format-1);
+}
+
+@font-face {
+  font-family: '#{$font-family-2}-black';
+  src: url("#{$font-url-2}/IRANSansWeb_Black.woff") format($font-format-1);
+}
+
+@font-face {
+  font-family: '#{$font-family-2}-bold';
+  src: url("#{$font-url-2}/IRANSansX-Bold.woff") format($font-format-1);
+}
+
+@font-face {
+  font-family: '#{$font-family-2}-number';
+  src: url("#{$font-url-2}/IRANSansXFaNum-Regular.woff") format($font-format-1);
+}
+
+@font-face {
+  font-family: '#{$font-family-2}-number-bold';
+  src: url("#{$font-url-2}/IRANSansXFaNum-Bold.woff") format($font-format-1);
+}

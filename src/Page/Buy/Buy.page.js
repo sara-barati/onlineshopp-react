@@ -4,13 +4,17 @@ import { useFormik } from 'formik';
 import { useFetch } from 'hook/useFetch';
 import * as yup from 'yup';
 import { ToastContainer, toast } from 'react-toastify';
-
-import {
-  DatePicker,
-  DateTimePicker,
-  DateRangePicker,
-  DateTimeRangePicker
-} from "react-advance-jalaali-datepicker";
+import DatePicker, { DateObject } from "react-multi-date-picker"
+// import DatePicker from "react-multi-date-picker"
+import persian_en from "react-date-object/locales/persian_en";
+import persian from "react-date-object/calendars/persian"
+import persian_fa from "react-date-object/locales/persian_fa"
+// import {
+//   DatePicker,
+//   DateTimePicker,
+//   DateRangePicker,
+//   DateTimeRangePicker
+// } from "react-advance-jalaali-datepicker";
 
 // import Button from '@material-ui/core/Button';
 import TextField from '@mui/material/TextField';
@@ -24,6 +28,9 @@ import { setLogin } from 'Redux/reducer/login.Slice';
 import Buy from 'assets/image/buy.png'
 import Grid from '@mui/material/Grid';
 import 'react-toastify/dist/ReactToastify.css';
+
+
+
 const validationSchema = yup.object({
   "username": yup
     .string('لطفا نام کاربری خود را وارد کنید')
@@ -55,18 +62,31 @@ const validationSchema = yup.object({
   let x= moment(new Date(today),'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD')
   console.log(x , "now");
 
-  const change = (unix, formatted) => {
-    console.log(unix); // returns timestamp of the selected value, for example.
-    setExpectDate(formatted); // returns the selected value in the format you've entered, forexample, "تاریخ: 1396/02/24 ساعت: 18:30".
-    console.log( formatted);
-    console.log(+new Date(expectDate))
-   
+  // const [value, setValue] = useState(new Date())
+  const [value, setValue] = useState(new DateObject())
+  function handleChange(value){
+    //تغییرات روی تاریخ رو اینجا اعمال کنید
+    setValue(value)
+  }
+if( products.length==0 ){
+window.location.replace("http://localhost:3000/shoppingbasket")
 }
- const DatePickerInput = (props) => {
-        return <input  {...props} />;
-    }
+
+
+
+  // const change = (unix, formatted) => {
+  //   console.log(unix); // returns timestamp of the selected value, for example.
+  //   setExpectDate(formatted); // returns the selected value in the format you've entered, forexample, "تاریخ: 1396/02/24 ساعت: 18:30".
+  //   console.log( formatted);
+    
+  // }
+//   console.log(+new Date(expectDate))
+//  const DatePickerInput = (props) => {
+//         return <input  {...props} />;
+//     }
 // Date.parse(expectDate) 
-console.log(Date.parse(expectDate) );
+console.log(value.unix * 1000);
+// console.log(Date.parse(expectDate) );
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -76,12 +96,18 @@ console.log(Date.parse(expectDate) );
     },
     validationSchema: validationSchema,
         onSubmit:(values)=>{  
-          if(expectDate){
-            values.expectAt = typeof expectDate === 'string' ? Date.parse(expectDate) : expectDate
+          // if(expectDate){
+          //   values.expectAt = typeof expectDate === 'string' ? Date.parse(expectDate) : expectDate
+          if(value){
+            values.expectAt=(value.unix * 1000)
             values.products = products
             values.price = total
             values.delivered = "false"
+            values.orderDate= Date.now();
+            // values.orderStatus=2
+            values.deliveredAt=0
             localStorage.setItem("ORDER_INFO", JSON.stringify(values))
+            localStorage.setItem("orderStatus", JSON.stringify(2))
             window.location.replace('http://localhost:5500/')
           }
 else{
@@ -174,7 +200,7 @@ else{
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <label htmlFor="expect-form">زمان تحویل :</label>
-                            <DateRangePicker
+                            {/* <DateRangePicker
                                 inputComponent={DatePickerInput}
                                 placeholderStart="تاریخ شروع"
                                 placeholder={x}
@@ -184,7 +210,26 @@ else{
                                 idStart="rangePickerStart"
                                 
                                 
-                            />
+                            /> */}
+                                <div style={{ direction: "rtl" }}>
+      <DatePicker
+      value={value}
+      onChange={handleChange}
+        calendar={persian}
+        locale={persian_fa}
+        format="MM/DD/YYYY "
+        calendarPosition="bottom-right"
+ 
+      />
+    </div>
+{/*                             
+                            <DatePicker 
+      value={value}
+      onChange={setValue}
+      format="MM/DD/YYYY"
+      calendar="persian"
+      locale="fa"
+    /> */}
                             
                        
               </Grid>

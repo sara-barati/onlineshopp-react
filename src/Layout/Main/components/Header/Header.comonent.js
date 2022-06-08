@@ -52,6 +52,7 @@ export default function Header() {
                   textDecoration: "none",
                   width: "80px",
                   height: "30px",
+                  fontSize:"small"
                 }}
                 color="inherit"
                 className="style.button"
@@ -99,7 +100,7 @@ export default function Header() {
   }}>
               <ShoppingCartIcon sx={{pl:1}}/>
               </Badge>
-              <Typography component="div" sx={{ flexGrow: 1 }}>
+              <Typography component="div" sx={{ flexGrow: 1 , fontSize:"small"}}>
                 سبد خرید
               </Typography>
             </IconButton>

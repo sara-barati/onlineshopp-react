@@ -17,6 +17,8 @@ export default function Resultpage() {
 
   // console.log(searchParams)
   const orderInfo = JSON.parse(localStorage.getItem("ORDER_INFO"))
+  const orderStatus =JSON.parse(localStorage.getItem("orderStatus"))
+  
   const dispatch = useDispatch()
   
     useEffect(() => {
@@ -30,7 +32,7 @@ export default function Resultpage() {
         axios({
           url: url,
           method: "post",
-          data:{orderInfo},
+          data:{orderInfo,orderStatus},
          
     
         })
@@ -47,9 +49,11 @@ export default function Resultpage() {
           localStorage.removeItem("TOTAL_PRICE")
           localStorage.removeItem("Orders")
           localStorage.removeItem("ORDER_INFO")
+          localStorage.removeItem("orderStatus")
       } else {
         console.log("non");
           localStorage.removeItem("ORDER_INFO")
+          localStorage.removeItem("orderStatus")
       }
   }, [searchParams])
   

@@ -101,9 +101,11 @@ console.log(res);
 const handleSubmitAll = (event) => {
   event.preventDefault();
   const form = new FormData(event.currentTarget);
+  form.set("thumbnail" ,img[0])
   const data = Object.fromEntries(form);
-
-  data.image = img;
+  console.log(data instanceof FormData)
+//   data.image = img;
+console.log(img);
   data.thumbnail = img[0];
   data.category = type.value;
   data.description = editorText
@@ -139,9 +141,9 @@ const handleSubmitAll = (event) => {
                       url: url,
                       method: "post",
                       data:data,
-                      headers: {
-                        "Content-Type": "multipart/form-data"
-                      },
+                    //   headers: {
+                    //     "Content-Type": "multipart/form-data"
+                    //   },
                 
                     })
                       .then(function (response) {
@@ -175,9 +177,9 @@ const handleSubmitAll = (event) => {
                     method: "put",
                     data:data,
                     id:editId,
-                    headers: {
-                      "Content-Type": "multipart/form-data"
-                    },
+                    // headers: {
+                    //   "Content-Type": "multipart/form-data"
+                    // },
               
                   })
                     .then(function (response) {

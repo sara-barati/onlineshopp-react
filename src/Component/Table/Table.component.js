@@ -5,7 +5,7 @@ function Table({tableHeaders, children}) {
     return (
         <div >
 
-            <table  >
+            <table style={{dir:"rtl"}}  >
                 <thead>
                 <tr>
 
@@ -18,7 +18,7 @@ function Table({tableHeaders, children}) {
                 </tr>
 
                 </thead>
-                <tbody>
+                <tbody >
                 {children}
                 </tbody>
             </table>

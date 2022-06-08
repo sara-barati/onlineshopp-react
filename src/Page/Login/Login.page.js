@@ -75,7 +75,7 @@ const validationSchema = yup.object({
      src={pic } 
      alt="logo"/></Box>
       <form onSubmit={formik.handleSubmit}  className="form">
-     <Typography variant="h4" component="h4" sx={{pl:"4%",mb:"10%", color:"#388e3c"}}>
+     <Typography variant="h4" component="h4" sx={{mb:"10%", color:"#388e3c",textAlign:"left"}}>
  ورود به پنل مدیریت
 </Typography>
         <TextField

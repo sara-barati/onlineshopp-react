@@ -154,7 +154,7 @@ export default function ShoppingBasketpage() {
                       <TableCell align="right">
                         {(+row.price).toLocaleString()}
                       </TableCell>
-                      <TableCell align="right">
+                      <TableCell align="right" sx={{ fontFamily: "IranSanse-number!important"}}>
                         {priceRow(row.price, row.count).toLocaleString()}
                       </TableCell>
                       <TableCell align="center">

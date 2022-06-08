@@ -18,12 +18,15 @@ import AddLocationIcon from "@mui/icons-material/AddLocation";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import { updateOrder } from "Redux/reducer/orderSlice";
-
+import { Slider } from "Component/Slider/Slider.component";
 export default function Productpage() {
   const [product, setProduct] = useState([]);
   const [category, setCategory] = useState([]);
   const [count, setCount] = useState(0);
 const [orderstate,setOrderstate]=useState([])
+const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 const dispatch=useDispatch()
   const url = `http://localhost:3002/products`;
   const getData = () => {
@@ -42,16 +45,33 @@ const dispatch=useDispatch()
     getData();
   }, []);
 
-  useEffect(() => {
-    api
-      .get(`/category`)
+  const url2 = `http://localhost:3002/category`;
+  const getData2 = () => {
+    axios({
+      url: url2,
+      method: "get",
+    })
       .then(function (response) {
         setCategory(response.data);
       })
       .catch(function (error) {
         console.log("error");
       });
+  };
+  useEffect(() => {
+    getData2();
   }, []);
+
+  // useEffect(() => {
+  //   api
+  //     .get(`/category`)
+  //     .then(function (response) {
+  //       setCategory(response.data);
+  //     })
+  //     .catch(function (error) {
+  //       console.log("error");
+  //     });
+  // }, []);
 
   console.log(category);
   // let categoryitem=category?.map(itemc=>{
@@ -149,7 +169,7 @@ const dispatch=useDispatch()
 
   return (
     <Box sx={{ width: "100vw",
-    height:"100vh",bgcolor:"#fafafa"}}>
+    height:"100vh",bgcolor:"#fafafa",my:"0",mt:"0",p:"0"}}>
       <Box
         sx={{
           width: "83vw",
@@ -157,16 +177,18 @@ const dispatch=useDispatch()
           bgcolor:"White",
           position:"absolute",
           top:"20vh",
+          // my:"10vh",mx:"10vw",
           bottom: "10vh",
           left: "8vw",
           display: "flex",
+          flexDirection:{xs:"column",md:"row"},
           alignItems: "center",
           justifyContent: "end",
-         
-          
+          // padding:"10px"
         }}
+
       >
-        <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <Box sx={{ display: "flex", flexDirection: "column", height: "70vh", alignContent:"center" }}>
           <Typography variant="h4"  align="right">{details?.name}</Typography>
           <Typography variant="h6" align="right">
             {details?.brand}
@@ -193,9 +215,9 @@ const dispatch=useDispatch()
             }}
             align="right"
           >
-            <span className="margin-r-10">تومان</span>
+            <span >تومان</span>
             <NumberFormat
-              className="fa-num"
+           
               value={details?.price}
               displayType={"text"}
               thousandSeparator={true}
@@ -252,5 +274,6 @@ const dispatch=useDispatch()
         {/* <div>{details?.name}</div> */}
       </Box>
     </Box>
-  );
+
+   );
 }

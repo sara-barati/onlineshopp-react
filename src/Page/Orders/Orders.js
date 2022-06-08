@@ -5,6 +5,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import OrderModal from './component/orderModal';
 import NumberFormat from 'react-number-format';
 import {useFetch} from 'hook/useFetch';
 import { useEffect } from 'react';
@@ -14,9 +15,12 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
+import Modal from "@mui/material/Modal";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useMemo } from 'react';
+import {ModalComponent} from "./component/Modal/Modal.component";
+
  import {CircularProgress,Pagination,Box,Typography, Button} from "@mui/material";
 import axios, { Axios } from 'axios';
 
@@ -25,7 +29,10 @@ export default function Orders() {
   const limit = useMemo(() => 4, []);
   const [page, setPage] = useState(1);
   const [data, setData]=useState([])
-  const [status,setValue]=useState("1")
+  const [status,setValue]=useState(1)
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const [open, setOpen] = React.useState(false);
   const url =`http://localhost:3002/orders?orderStatus=${status}&_page=${page}&_limit=${limit}`;
 
   const getData = (page) => {
@@ -69,8 +76,22 @@ export default function Orders() {
   )
   console.log(status);
   // console.log(data.data);
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "min(600px,100%)",
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    maxHeight: "700px",
+    overflowY: "auto",
+    boxShadow: 24,
+    p: 4,
+  };
   return (
  <>
+  
     <FormControl>
       <FormLabel id="demo-radio-buttons-group-label">مدیریت سفارش ها</FormLabel>
       <RadioGroup
@@ -96,7 +117,7 @@ export default function Orders() {
         marginInline: 2
       }}
     >
-    <TableContainer component={Paper} dir="rtl" sx={{width:"45vw" , height:"outo",alignContent:"center", textAlign:"center", mt:"5%"}}aria-label="customized table" >
+    <TableContainer component={Paper} dir="rtl" sx={{width:"45vw" , height:"outo",alignContent:"center", textAlign:"center", mt:"5%",mb:5}}aria-label="customized table" >
       <Table>
         <TableHead>
           <TableRow>
@@ -120,12 +141,12 @@ export default function Orders() {
           
 
               <TableCell align="right">
-              {item.customerDetail.firstName} <span>{item.customerDetail.lastName}</span>
+              {item.orderInfo.username} <span>{item.orderInfo.lastName}</span>
               </TableCell>
 
 
               <TableCell align="right">
-            <NumberFormat className='fa-num' value={item.purchaseTotal || +item.purchaseTotal} displayType={'text'}
+            <NumberFormat className='fa-num' value={item.orderInfo.price || +item.orderInfo.price} displayType={'text'}
                                       thousandSeparator={true}
                                       prefix={''}/>
                                 
@@ -134,7 +155,7 @@ export default function Orders() {
               </TableCell>
               
               <TableCell align="right">
-            {moment(new Date(item.orderDate),'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD')}
+            {moment(new Date(item.orderInfo.orderDate),'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD')}
                  </TableCell>
     
               {/* {Categroys?.map((categroyItem) => {
@@ -147,8 +168,30 @@ export default function Orders() {
                 }
               })} */}
               <TableCell align="right">
+              {/* <Button
+        variant="contained"
+     
+        onClick={handleOpen}
+      >
+   
+    بررسی سفارش
+      </Button>
               
-                <Link to="">بررسی سفارش </Link>
+   <Modal
+
+open={open}
+onClose={handleClose}
+aria-labelledby="modal-modal-title"
+aria-describedby="modal-modal-description"
+>
+<Box sx={style}>
+  <OrderModal orderData={item}/>
+
+       {    console.log(item)  }                       
+        </Box>
+</Modal> */}
+ <ModalComponent orderData={item}/>
+
               </TableCell>
          
             </TableRow>
@@ -164,7 +207,7 @@ export default function Orders() {
           //  count={Math.ceil(32/limit)}
           count={Math.ceil(total / limit)}
           //  count={Math.ceil(Product?.headers["Product-total-count"] / limit)}
-          sx={{ mt: "3%" ,position:"absolute", bottom:"3%"}}
+          sx={{ mt: "10%" ,position:"absolute", bottom:"0%"}}
           // Math.ceil(total data/ limit)
           // 6 / 4 = 1
           onChange={(_, page) => setPage(page)}
