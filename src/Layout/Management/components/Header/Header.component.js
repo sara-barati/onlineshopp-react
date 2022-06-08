@@ -132,7 +132,10 @@ export default function Headercomponent() {
                   
                   }}
                   onClick={() => {
-                    localStorage.clear();
+                    // localStorage.clear();
+                    localStorage.removeItem("token");
+                    localStorage.removeItem( "is-login");
+                   
                   }}
                 >
                خروج

@@ -86,7 +86,10 @@ const submitUploadForm = async (e) => {
  // console.dir(e.currentTarget[0].value)
  if (e.currentTarget[0].value !== '') {
      e.currentTarget.reset();
+<<<<<<< HEAD
 
+=======
+>>>>>>> shopping
      toast.success('عکس با موفقیت آپلود شد.')
     const res= formimg(formData);
      // const res = await dispatch(upload(formData))
@@ -102,9 +105,17 @@ console.log(res);
 const handleSubmitAll = (event) => {
   event.preventDefault();
   const form = new FormData(event.currentTarget);
+<<<<<<< HEAD
   const data = Object.fromEntries(form);
 
   data.image = img;
+=======
+  form.set("thumbnail" ,img[0])
+  const data = Object.fromEntries(form);
+  console.log(data instanceof FormData)
+//   data.image = img;
+console.log(img);
+>>>>>>> shopping
   data.thumbnail = img[0];
   data.category = type.value;
   data.description = editorText
@@ -140,9 +151,15 @@ const handleSubmitAll = (event) => {
                       url: url,
                       method: "post",
                       data:data,
+<<<<<<< HEAD
                       headers: {
                         "Content-Type": "multipart/form-data"
                       },
+=======
+                    //   headers: {
+                    //     "Content-Type": "multipart/form-data"
+                    //   },
+>>>>>>> shopping
                 
                     })
                       .then(function (response) {
@@ -176,9 +193,15 @@ const handleSubmitAll = (event) => {
                     method: "put",
                     data:data,
                     id:editId,
+<<<<<<< HEAD
                     headers: {
                       "Content-Type": "multipart/form-data"
                     },
+=======
+                    // headers: {
+                    //   "Content-Type": "multipart/form-data"
+                    // },
+>>>>>>> shopping
               
                   })
                     .then(function (response) {

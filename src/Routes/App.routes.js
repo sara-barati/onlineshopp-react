@@ -35,7 +35,7 @@ export default function Approutes() {
        <Route path="/category/:productsId" element={<PublicRoute MyComponent={Categorypage}/>}/>
        <Route path="/product/:productId" element={<PublicRoute MyComponent={Productpage}/>}/>
        <Route path="/shoppingbasket" element={<PublicRoute MyComponent={ShoppingBasketpage}/>}/>
-       <Route path="Buy" element={<PublicRoute MyComponent={Buypage}/>}/>
+       <Route path="/Buy" element={<PublicRoute MyComponent={Buypage}/>}/>
        <Route path="/Result" element={<PublicRoute MyComponent={Resultpage}/>}/>
        <Route path="*" element={<NotFoundpage/>}/>
        

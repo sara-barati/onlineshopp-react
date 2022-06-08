@@ -57,13 +57,14 @@ function ProductCard({data}) {
                     </span>
 
                         <span>
-                        <NumberFormat className='fa-num' value={data.price || +data.price} displayType={'text'}
-                                      thousandSeparator={true}
-                                      prefix={''}/>
                          <span style={{marginRight: '5px'}}>
                         تومان
                          </span>
+                        <NumberFormat className='fa-num' value={data.price || +data.price} displayType={'text'}
+                                      thousandSeparator={true}
+                                      prefix={''}/>
                     </span>
+    
 
                     </Typography>
                 </CardContent>
