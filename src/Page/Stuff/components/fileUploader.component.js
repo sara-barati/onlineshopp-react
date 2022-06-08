@@ -2,7 +2,10 @@ import React, {useRef} from 'react'
 import Button from "@mui/material/Button";
 import {Input} from "@mui/icons-material";
 import Box from "@mui/material/Box";
+<<<<<<< HEAD
 import { ToastContainer, toast } from 'react-toastify';
+=======
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
 
 export default function FileUploader  ({onFileSelectSuccess, onFileSelectError, handleSubmit}){
     const fileInput = useRef(null)
@@ -33,7 +36,11 @@ export default function FileUploader  ({onFileSelectSuccess, onFileSelectError, 
             <Button type='submit' color='info' variant="contained">
                 Upload
             </Button>
+<<<<<<< HEAD
             <ToastContainer />
+=======
+
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
         </Box>
 
     )

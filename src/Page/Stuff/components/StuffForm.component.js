@@ -36,7 +36,11 @@ export default function StuffFormcomponent({categories, types, editId, info, onC
             value: categories?.find(category => category.id === +info.category).id
         })
 
+<<<<<<< HEAD
         setImg([info.image])
+=======
+        setImg(info.image)
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
     }
 }, [editId])
 
@@ -47,15 +51,24 @@ const[select,setSElect]=useState("")
 
 const imageList =
  img?.length > 0 &&
+<<<<<<< HEAD
  img?.map(imgt => {
 
   return {
       value: imgt,
       label: <img style={{width: '70px', height: '70px'}} src={`http://localhost:3002/files/${imgt}`}/>
+=======
+ img?.map(img => {
+
+  return {
+      value: img,
+      label: <img style={{width: '70px', height: '70px'}} src={`http://localhost:3002/files/${img}`}/>
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
   }
 })
 
 
+<<<<<<< HEAD
 const handleChangeType = (inp, value) => {setType(value)}
 
 // const handleChangeType = (inp, value) => {
@@ -71,6 +84,9 @@ const handleChangeType = (inp, value) => {setType(value)}
 //             break
 //     }
 // };
+=======
+
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
   const options= categories?.map(category => {
     return {
         value: category.id,
@@ -87,6 +103,7 @@ const submitUploadForm = async (e) => {
  if (e.currentTarget[0].value !== '') {
      e.currentTarget.reset();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> shopping
@@ -94,11 +111,19 @@ const submitUploadForm = async (e) => {
     const res= formimg(formData);
      // const res = await dispatch(upload(formData))
 console.log(res);
+=======
+
+     toast.success('عکس با موفقیت آپلود شد.')
+    const res= formimg(formData);
+     // const res = await dispatch(upload(formData))
+
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
      setImg((prevImg) => [...prevImg, res.data])
  } else {
      toast.error('حداقل یک عکس آپلود کنید')
  }
 
+<<<<<<< HEAD
 };
 
 
@@ -118,6 +143,21 @@ console.log(img);
 >>>>>>> shopping
   data.thumbnail = img[0];
   data.category = type.value;
+=======
+
+};
+
+const handleSubmitAll = (event) => {
+  event.preventDefault();
+
+
+  const form = new FormData(event.currentTarget);
+  const data = Object.fromEntries(form);
+
+  data.image = img;
+  data.thumbnail = img[0];
+  // data.category = type.value;
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
   data.description = editorText
   console.log(data)
   let schema = yup.object().shape({
@@ -152,6 +192,7 @@ console.log(img);
                       method: "post",
                       data:data,
 <<<<<<< HEAD
+<<<<<<< HEAD
                       headers: {
                         "Content-Type": "multipart/form-data"
                       },
@@ -160,6 +201,11 @@ console.log(img);
                     //     "Content-Type": "multipart/form-data"
                     //   },
 >>>>>>> shopping
+=======
+                      headers: {
+                        "Content-Type": "multipart/form-data"
+                      },
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
                 
                     })
                       .then(function (response) {
@@ -170,7 +216,11 @@ console.log(img);
                       .catch(function (error) {
                         console.log("error");
                       });
+<<<<<<< HEAD
                      
+=======
+                
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
                 //   useEffect(() => {
                 //     postData(url);
                 //   }, [url]);
@@ -186,6 +236,7 @@ console.log(img);
 
 
 
+<<<<<<< HEAD
                   const urlput=`http://localhost:3002/products/${editId}`;
           
                   axios({
@@ -218,6 +269,33 @@ console.log(img);
                 
                 //   setUpdate(!update)
                 //   onClose()
+=======
+                //   const urlput=`http://localhost:3002/products/${editId}`;
+          
+                //   axios({
+                //     url: urlput,
+                //     method: "put",
+                //     data:data,
+                //     // id:editId,
+                //     headers: {
+                //       "Content-Type": "multipart/form-data"
+                //     },
+              
+                //   })
+                //     .then(function (response) {
+                   
+                //       console.log(response.data);
+                      
+                //     })
+                //     .catch(function (error) {
+                //       console.log("error");
+                //     });
+              
+                  const put=putData(editId,data)
+                
+                  setUpdate(!update)
+                  onClose()
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
               }
 
           } else {
@@ -253,25 +331,42 @@ const handleDeleteImage = (index) => {
   return (
     <>
     {types==='add'?
+<<<<<<< HEAD
         <Box   dir="rtl" sx={{display: 'flex', flexDirection: "column", justifyContent: 'center', alignItems: 'start'}}>
 
             <Box sx={{display: "flex", justifyContent: 'space-between', alignItems: 'center', width: '100%'}}>
                 <Typography align='right'>
+=======
+        <Box sx={{display: 'flex', flexDirection: "column", justifyContent: 'center', alignItems: 'start'}}>
+
+            <Box sx={{display: "flex", justifyContent: 'space-between', alignItems: 'center', width: '100%'}}>
+                <Typography>
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
                     افزودن/ویرایش کالا
                 </Typography>
                 <CloseIcon cursor="pointer" onClick={onClose}/>
             </Box>
 
+<<<<<<< HEAD
             <Typography sx={{mt: 1}} align="right">
+=======
+            <Typography sx={{mt: 1}}>
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
                 تصویر کالا :
             </Typography>
 
             <FileUploader
+<<<<<<< HEAD
             
                         onFileSelectSuccess={(file) => setSelectedFile(file)}
                         onFileSelectError={({error}) => alert(error)}
                         handleSubmit={submitUploadForm}
                         
+=======
+                        onFileSelectSuccess={(file) => setSelectedFile(file)}
+                        onFileSelectError={({error}) => alert(error)}
+                        handleSubmit={submitUploadForm}
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
                     />
 
             <Box
@@ -346,7 +441,11 @@ const handleDeleteImage = (index) => {
                     موجودی کالا :
                 </Typography>
 
+<<<<<<< HEAD
                 <input type='number' name='count' placeholder='موجودی کالا را وارد نمایید...' style={{
+=======
+                <input type='number' name='quantity' placeholder='موجودی کالا را وارد نمایید...' style={{
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
                     width: '100%',
                     height: '55px',
                     border: '1px solid #ccc',
@@ -378,8 +477,12 @@ const handleDeleteImage = (index) => {
                 /> */}
 
 <Select options={options} 
+<<<<<<< HEAD
  onChange={(value) => handleChangeType('category', value)}
  placeholder='دسته ی مورد نظر را انتخاب  کنید...'
+=======
+ placeholder='دسته ی مورد نظر را انتخاب یا ایجاد کنید...'
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
  />
 
                 {/*create ck-editor*/}
@@ -398,17 +501,27 @@ const handleDeleteImage = (index) => {
                 />
 
 <Box sx={{display: 'flex', justifyContent: 'center', mt: 2}}>
+<<<<<<< HEAD
                             <Button type='submit' size='large' color='info'  variant='contained'>ذخیره</Button>
                         </Box>
                        <ToastContainer/>
+=======
+                            <Button type='submit' size='large' color='info' variant='contained'>ذخیره</Button>
+                        </Box>
+
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
             </Box>
 
         
          </Box> :
 
          // jsx for edit modal
+<<<<<<< HEAD
          <Box
          dir="rtl"  sx={{
+=======
+         <Box sx={{
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
              display: 'flex',
              flexDirection: "column",
              justifyContent: 'center',
@@ -522,9 +635,13 @@ const handleDeleteImage = (index) => {
                      دسته کالا :
                  </Typography>
                  <Select options={options} 
+<<<<<<< HEAD
                  value= {type}
                   onChange={(value) => handleChangeType('category', value)}
  placeholder='دسته ی مورد نظر را انتخاب کنید...'
+=======
+ placeholder='دسته ی مورد نظر را انتخاب یا ایجاد کنید...'
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
  />
                  {/* <CreatableSelect
                      name='category'

@@ -5,7 +5,10 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+<<<<<<< HEAD
 import OrderModal from './component/orderModal';
+=======
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
 import NumberFormat from 'react-number-format';
 import {useFetch} from 'hook/useFetch';
 import { useEffect } from 'react';
@@ -15,12 +18,18 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
+<<<<<<< HEAD
 import Modal from "@mui/material/Modal";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useMemo } from 'react';
 import {ModalComponent} from "./component/Modal/Modal.component";
 
+=======
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import { useMemo } from 'react';
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
  import {CircularProgress,Pagination,Box,Typography, Button} from "@mui/material";
 import axios, { Axios } from 'axios';
 
@@ -29,10 +38,14 @@ export default function Orders() {
   const limit = useMemo(() => 4, []);
   const [page, setPage] = useState(1);
   const [data, setData]=useState([])
+<<<<<<< HEAD
   const [status,setValue]=useState(1)
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [open, setOpen] = React.useState(false);
+=======
+  const [status,setValue]=useState("1")
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
   const url =`http://localhost:3002/orders?orderStatus=${status}&_page=${page}&_limit=${limit}`;
 
   const getData = (page) => {
@@ -76,6 +89,7 @@ export default function Orders() {
   )
   console.log(status);
   // console.log(data.data);
+<<<<<<< HEAD
   const style = {
     position: "absolute",
     top: "50%",
@@ -92,6 +106,10 @@ export default function Orders() {
   return (
  <>
   
+=======
+  return (
+ <>
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
     <FormControl>
       <FormLabel id="demo-radio-buttons-group-label">مدیریت سفارش ها</FormLabel>
       <RadioGroup
@@ -117,7 +135,11 @@ export default function Orders() {
         marginInline: 2
       }}
     >
+<<<<<<< HEAD
     <TableContainer component={Paper} dir="rtl" sx={{width:"45vw" , height:"outo",alignContent:"center", textAlign:"center", mt:"5%",mb:5}}aria-label="customized table" >
+=======
+    <TableContainer component={Paper} dir="rtl" sx={{width:"45vw" , height:"outo",alignContent:"center", textAlign:"center", mt:"5%"}}aria-label="customized table" >
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
       <Table>
         <TableHead>
           <TableRow>
@@ -141,12 +163,20 @@ export default function Orders() {
           
 
               <TableCell align="right">
+<<<<<<< HEAD
               {item.orderInfo.username} <span>{item.orderInfo.lastName}</span>
+=======
+              {item.customerDetail.firstName} <span>{item.customerDetail.lastName}</span>
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
               </TableCell>
 
 
               <TableCell align="right">
+<<<<<<< HEAD
             <NumberFormat className='fa-num' value={item.orderInfo.price || +item.orderInfo.price} displayType={'text'}
+=======
+            <NumberFormat className='fa-num' value={item.purchaseTotal || +item.purchaseTotal} displayType={'text'}
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
                                       thousandSeparator={true}
                                       prefix={''}/>
                                 
@@ -155,7 +185,11 @@ export default function Orders() {
               </TableCell>
               
               <TableCell align="right">
+<<<<<<< HEAD
             {moment(new Date(item.orderInfo.orderDate),'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD')}
+=======
+            {moment(new Date(item.orderDate),'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD')}
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
                  </TableCell>
     
               {/* {Categroys?.map((categroyItem) => {
@@ -168,6 +202,7 @@ export default function Orders() {
                 }
               })} */}
               <TableCell align="right">
+<<<<<<< HEAD
               {/* <Button
         variant="contained"
      
@@ -192,6 +227,10 @@ aria-describedby="modal-modal-description"
 </Modal> */}
  <ModalComponent orderData={item}/>
 
+=======
+              
+                <Link to="">بررسی سفارش </Link>
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
               </TableCell>
          
             </TableRow>
@@ -207,7 +246,11 @@ aria-describedby="modal-modal-description"
           //  count={Math.ceil(32/limit)}
           count={Math.ceil(total / limit)}
           //  count={Math.ceil(Product?.headers["Product-total-count"] / limit)}
+<<<<<<< HEAD
           sx={{ mt: "10%" ,position:"absolute", bottom:"0%"}}
+=======
+          sx={{ mt: "3%" ,position:"absolute", bottom:"3%"}}
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
           // Math.ceil(total data/ limit)
           // 6 / 4 = 1
           onChange={(_, page) => setPage(page)}

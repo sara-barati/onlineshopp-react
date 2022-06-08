@@ -115,6 +115,7 @@ const [productInfo, setProductInfo] = useState({
     }).then(async (result) => {
       if (result.isConfirmed) {
         const idproduct = id;
+<<<<<<< HEAD
         deletProduct(idproduct).then( ()=>    axios({
           url: url,
           method: "get",
@@ -133,6 +134,10 @@ const [productInfo, setProductInfo] = useState({
 
         // getData(page);
         // window.location.reload()
+=======
+        deletProduct(idproduct);
+
+>>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
         Swal.fire("پاک شد!", "محصول مورد نظر با موفقیت حذف شد.", "success");
       }
     });
