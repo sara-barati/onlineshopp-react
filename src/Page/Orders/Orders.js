@@ -118,7 +118,7 @@ export default function Orders() {
       }}
     >
     <TableContainer component={Paper} dir="rtl" sx={{width:"45vw" , height:"outo",alignContent:"center", textAlign:"center", mt:"5%",mb:5}}aria-label="customized table" >
-      <Table>
+      <Table sx={{mb:6}}>
         <TableHead>
           <TableRow>
             <TableCell align="right">نام کاربر</TableCell>

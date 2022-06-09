@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect,useState} from 'react';
 import {Link, useSearchParams} from "react-router-dom";
 import success from 'assets/image/success.png'
 import failed from 'assets/image/fail2.png'
@@ -14,15 +14,68 @@ export default function Resultpage() {
   const currentParams = Object.fromEntries([...searchParams]);
   // const test=Object.fromEntries([currentParams])
   console.log(currentParams)
-
+const[val,setVal]=useState([])
   // console.log(searchParams)
   const orderInfo = JSON.parse(localStorage.getItem("ORDER_INFO"))
   const orderStatus =JSON.parse(localStorage.getItem("orderStatus"))
-  
+  const tokenn=(localStorage.getItem("token"))
   const dispatch = useDispatch()
   
     useEffect(() => {
    
+//         orderInfo?.products?.map(product=>{
+
+//             console.log(product?.count);
+//             const cc=product?.count
+
+//             const url2=`http://localhost:3002/products?id=${product.id}`;
+          
+//             axios({
+//               url: url2,
+//               method: "get",
+        
+        
+//             })
+//               .then(function (response) {
+//                 setVal(response.data);
+//                 console.log(response.data);
+                
+//               })
+          
+// const c=val.count;
+// const res=c-cc
+
+// val.count=cc
+// console.log(val);
+// console.log(cc);
+//             const url1=`http://localhost:3002/products/${product.id}`;
+//             axios({
+//               url: url1,
+//               method: "put",
+//               data:val,
+//             //   id:product.id,
+//                 //    headers: {
+//                 //         "Content-Type": "multipart/form-data"
+//                 //       },
+         
+        
+//             })
+//               .then(function (response) {
+             
+//                 console.log(response.data);
+                
+//               })
+//               .catch(function (error) {
+//                 console.log("error");
+//               });
+             
+
+//         }
+            
+//         )
+
+
+        
       if (currentParams.result === 'success') {
         // dispatch(setPostOrder(orderInfo));
 
