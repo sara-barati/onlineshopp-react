@@ -137,10 +137,14 @@ export default function Orders() {
     >
 <<<<<<< HEAD
     <TableContainer component={Paper} dir="rtl" sx={{width:"45vw" , height:"outo",alignContent:"center", textAlign:"center", mt:"5%",mb:5}}aria-label="customized table" >
+<<<<<<< HEAD
 =======
     <TableContainer component={Paper} dir="rtl" sx={{width:"45vw" , height:"outo",alignContent:"center", textAlign:"center", mt:"5%"}}aria-label="customized table" >
 >>>>>>> 137695280390d05243d8edf23ebcc0b6369e20f1
       <Table>
+=======
+      <Table sx={{mb:6}}>
+>>>>>>> shopping
         <TableHead>
           <TableRow>
             <TableCell align="right">نام کاربر</TableCell>

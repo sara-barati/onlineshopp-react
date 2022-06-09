@@ -247,7 +247,7 @@ export default function ShoppingBasketpage() {
           </Button>
           <Typography
             component="figure"
-            sx={{ width: "min(300px,100%)", pr: "13%" }}
+            sx={{ width: "min(300px,100%)", pr: "40vw",alignItems:"center" }}
           >
             <img src={shopping} alt="shopping-card image" />
           </Typography>
